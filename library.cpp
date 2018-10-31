@@ -3,7 +3,10 @@
 
 void library :: init() //resource download
 {
-	freopen("resource.dat","r",stdin);
+	ifstream read_resource;
+	read_resource.open("resource.dat");
+	cout<<"init start"<<endl;
+	
 	undergraduate_number=0;
 	graduate_number=0;
 	faculty_number=0;
@@ -11,37 +14,41 @@ void library :: init() //resource download
 	magazine_number=0;
 	ebook_number=0;
 	string temp_type,temp_name;
-	cin>>temp_type,temp_name;
+	cout<<temp_type<<temp_name<<endl;
 	do
 	{
 		temp_type.clear();
 		temp_name.clear();
-		cin>>temp_type,temp_name;
+		read_resource>>temp_type>>temp_name;
 		if(temp_type.size()!=0)
 		{
 			if(temp_type=="Book")
 			{
 				book_number++;
+				cout<<temp_type<<" "<<temp_name<<book_number<<endl;
 				resource_book.add_resource(temp_name);
 			}
 			else if(temp_type=="E_book")
 			{
 				ebook_number++;
+				cout<<temp_type<<" "<<ebook_number<<endl;
 				resource_ebook.add_resource(temp_name);
 			}
 			else if(temp_type=="Magazine")
 			{
 				magazine_number++;
+				cout<<temp_type<<" "<<magazine_number<<endl;
 				resource_magazine.add_resource(temp_name);					
 			}
 		}
 	}	
-	while(temp_type.size()==0);
-	fclose(stdin);
+	while(temp_type.size()!=0);
+	read_resource.close();
 }
 
 int library :: request_borrow(string member_name,string member_type,string resource_name,string resource_type,int year,int month,int day)
 {
+	cout<<"request_borrow!!!"<<endl;
 	int temp;
 	int check=0;
 	if(member_type=="Undergraduate")
@@ -58,13 +65,14 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		{
 			return 0;
 		}
+		cout<<"check is"<<check<<temp<<endl;
 		if(check==0) //there is no member reg
 		{
-			temp ++;
 			undergraduate t;
 			t.init(member_name);
 			member_undergraduate.push_back(t);
 		}
+		
 		if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
 					return 0;
 					
@@ -227,6 +235,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 }
 int library :: request_return(string member_name,string member_type,string resource_name,string resource_type,int year,int month,int day)
 {
+	cout<<"request_return!!!"<<endl;
 	int temp;
 	int check=0;
 
@@ -332,7 +341,9 @@ int library :: request_return(string member_name,string member_type,string resou
 
 int library :: input()
 {
-	freopen("input.dat","r",stdin);
+	ifstream read_input;
+	read_input.open("input.dat");
+	cout<<"input start!"<<endl;
 	int t=0;
 	int year;
 	int month;
@@ -343,15 +354,17 @@ int library :: input()
 	char operation;
 	string member_type;
 	string member_name;
-	cin>>date>>resource_type>>resource_name>>member_type>>member_type>>member_name;
-
+	read_input>>date>>resource_type>>resource_name>>member_type>>member_type>>member_name;
 	cout<<"Op_#	Return_code	Description"<<endl;
 	do
 	{
 		resource_type.clear();
-		cin>>date>>resource_type>>resource_name>>operation>>member_type>>member_name;
+		read_input>>date>>resource_type>>resource_name>>operation>>member_type>>member_name;
+
+	
 		if(resource_type.size()!=0)
 		{
+			cout<<"if station!"<<endl;
 			cout<<t<<"	";
 			t++;
 			stringstream ss(date);
@@ -367,10 +380,12 @@ int library :: input()
 			
 			if(operation=='B')
 			{
+				cout<<"operation is B"<<endl;
 				request_borrow(member_name,member_type,resource_name,resource_type,year,month,day);
 			}
 			else if(operation=='R')
 			{					
+				cout<<"operation is R"<<endl;
 				request_return(member_name,member_type,resource_name,resource_type,year,month,day);					
 			}
 			else

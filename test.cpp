@@ -1,16 +1,41 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <sstream>
-#include "member.h"
-#include "resource.h"
 using namespace std;
 int main()
 {
-	member m;
-	resource r;
-	m.init("what");
-	freopen("input.dat","r",stdin);
+	string temp_type,temp_name;
+	ifstream read_resource;
+	read_resource.open("resource.dat");
+	read_resource>>temp_type>>temp_name;
+	do
+	{
+		temp_type.clear();
+		temp_name.clear();
+		read_resource>>temp_type>>temp_name;
+		if(temp_type.size()!=0)
+		{
+			if(temp_type=="Book")
+			{
+				cout<<temp_type<<" "<<temp_name<<endl;
+			}
+			else if(temp_type=="E_book")
+			{
+				cout<<temp_type<<" "<<temp_name<<endl;
+			}
+			else if(temp_type=="Magazine")
+			{
+				cout<<temp_type<<" "<<temp_name<<endl;			
+			}
+		}
+	}	
+	while(temp_type.size()!=0);
+	read_resource.close();
+
+	ifstream read_input;
+	read_input.open("input.dat");
 	int t=0;
 	int year;
 	int month;
@@ -21,17 +46,18 @@ int main()
 	char operation;
 	string member_type;
 	string member_name;
-	cin>>date>>resource_type>>resource_name>>member_type>>member_type>>member_name;
-
+	read_input>>date>>resource_type>>resource_name>>member_type>>member_type>>member_name;
+	
+	cout<<"why!"<<date<<resource_type<<resource_name<<operation<<member_type<<member_name<<endl;
 	cout<<"Op_#	Return_code	Description"<<endl;
 	do
 	{
 		resource_type.clear();
-		cin>>date>>resource_type>>resource_name>>operation>>member_type>>member_name;
+		read_input>>date>>resource_type>>resource_name>>operation>>member_type>>member_name;
 		if(resource_type.size()!=0)
 		{
-			if(resource_type=="Book")
-				cout<<"what"<<endl;
+		cout<<"why!"<<date<<resource_type<<resource_name<<operation<<member_type<<member_name<<endl;
+			cout<<"if station!"<<endl;
 			cout<<t<<"	";
 			t++;
 			stringstream ss(date);
@@ -47,11 +73,11 @@ int main()
 			
 			if(operation=='B')
 			{
-				cout<<"borrow"<<endl;
+				cout<<"operation is B"<<endl;
 			}
 			else if(operation=='R')
 			{					
-				cout<<"return"<<endl;				
+				cout<<"operation is R"<<endl;				
 			}
 			else
 			{
@@ -59,26 +85,7 @@ int main()
 			}
 		}
 	}while(resource_type.size()!=0);
+
+	fclose(stdin);
+
 }
-
-class n
-{
-	private:
-		int xx;
-	public:
-		int in(int x){
-			xx = x;
-		}
-		int out()
-		{
-			cout<<xx<<endl;
-		}
-		int out2()
-		{
-			return xx;
-		}
-
-};
-
-
-

@@ -20,7 +20,7 @@ class member
 		
 	public:
 		member();
-		~member();
+//		~member();
 		int check_name(string n);
 		int check_borrow(string source_name,string source_type);
 		int borrow_resource(string resource_name,string resource_type,int y,int m,int d);

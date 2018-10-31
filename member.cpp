@@ -5,10 +5,10 @@ member::member()
 	borrow_number = 0;
 }
 
-member::~member()
-{
-	cout<<"end"<<endl;
-}
+//member::~member()
+//{
+//	cout<<"end"<<endl;
+//}
 
 int member :: check_name(string check_name)
 {

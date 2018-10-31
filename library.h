@@ -1,6 +1,8 @@
 #include "member.h"
 #include "resource.h"
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <vector>
 #include <sstream>
 

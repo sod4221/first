@@ -2,7 +2,7 @@
 
 int main()
 {
-	freopen("output.dat","w",stdout);
+//	freopen("output.dat","w",stdout);
 	library lib;
 	lib.init();
 	lib.input();
