@@ -4,7 +4,7 @@
 #define can_delay_day  14;
 #define one_year  360;
 #define one_month 30;
-#define limit_undergraduate  1;
+const int limit_undergraduate = 1;
 
 using namespace std;
 class member

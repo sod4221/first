@@ -59,7 +59,7 @@ int member :: return_resource(string resource_name,string resource_type)
 	}
 	if(check==0)
 	{
-		cout<<"you did not borrow this book"<<endl;
+		cout<<"3	you did not borrow this book"<<endl;
 		return 0;
 	}
 	else
@@ -91,9 +91,9 @@ int undergraduate :: check_name(string n)
 {
 	if(name==n)
 	{
-		if(borrow_number==1)
+		if(borrow_number>=limit_undergraduate)
 		{
-			cout<<"Exceeds your possible number of borrow. Possible # of borrows: 1"<<endl;
+			cout<<"Exceeds your possible number of borrow. Possible # of borrows: "<<limit_undergraduate<<endl;
 
 			return -1; //error
 		}
@@ -119,7 +119,7 @@ int undergraduate :: borrow_resource(string resource_name,string resource_type,i
 {
 	if(borrow_number==1)
 	{
-		cout<<"you can not borrow"<<endl;
+		cout<<"Exceeds your possible number of borrow. Possible # of borrows:"<<limit_undergraduate<<endl;
 		return 0;
 	}
 	else
@@ -138,7 +138,7 @@ int undergraduate :: return_resource(string resource_name,string resource_type,i
 {
 	if(borrow_number==0)
 	{
-		cout<<"you did not borrow this book"<<endl;
+		cout<<"3	you did not borrow this "<<resource_type<<"."<<endl;
 	}
 	else
 	{

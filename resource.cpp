@@ -42,7 +42,7 @@ int resource :: check_name(string n)
 
 	}
 }
-int resource :: req_borrow(string resource_name,int y,int m,int d)
+int resource :: req_borrow(string resource_name,string resource_type,int y,int m,int d)
 {
 	int temp;
 	int check=0;
@@ -58,7 +58,7 @@ int resource :: req_borrow(string resource_name,int y,int m,int d)
 	if(check==0)
 	{
 	//	cout<<"no resource"<<endl;
-		return 0;
+		return -1;
 	}
 	if(borrow.at(temp) == 0)
 	{
@@ -78,7 +78,7 @@ int resource :: req_borrow(string resource_name,int y,int m,int d)
 	}
 	else
 	{
-		cout<<"this resource is already borrowed"<<endl;
+		cout<<"5	other member already borrwed"<<resource_type<<". This "<<resource_type<<" will be returned at"<<year.at(temp)<<"/"<<month.at(temp)<<"/"<<day.at(temp)<<endl;
 		return 0;
 	}
 

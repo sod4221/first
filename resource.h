@@ -15,7 +15,7 @@ class resource
 	public:
 		int add_resource(string source_name);
 		int check_name(string n);
-		int req_borrow(string resource_name,int y,int m,int d);
+		int req_borrow(string resource_name,string resource_type,int y,int m,int d);
 		int req_return(string resource_name);
 };
 class book : public resource

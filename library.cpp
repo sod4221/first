@@ -70,7 +70,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 					
 		if(resource_type=="Book")
 		{
-			if(resource_book.req_borrow(resource_name,year,month,day)==0)
+			if(resource_book.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
 			}
@@ -80,7 +80,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="E_book")
 		{
-			if(resource_ebook.req_borrow(resource_name,year,month,day)==0)
+			if(resource_ebook.req_borrow(resource_name,"e_book",year,month,day)==0)
 			{
 				return 0;
 			}
@@ -90,7 +90,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="Magazine")
 		{
-			if(resource_magazine.req_borrow(resource_name,year,month,day)==0)
+			if(resource_magazine.req_borrow(resource_name,"magazine",year,month,day)==0)
 			{
 				return 0;
 			}
@@ -126,31 +126,31 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			return 0;
 		if(resource_type=="Book")
 		{
-			if(resource_book.req_borrow(resource_name,year,month,day)==0)
+			if(resource_book.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
 			}
-			(member_graduate.at(temp)).borrow_resource(resource_name,"Book",year,month,day);
+			(member_graduate.at(temp)).borrow_resource(resource_name,resource_type,year,month,day);
 			cout<<"0	Success."<<endl;
 			return 1;
 		}
 		else if(resource_type=="E_book")
 		{
-			if(resource_ebook.req_borrow(resource_name,year,month,day)==0)
+			if(resource_ebook.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
 			}
-			(member_graduate.at(temp)).borrow_resource(resource_name,"E_book",year,month,day);
+			(member_graduate.at(temp)).borrow_resource(resource_name,resource_type,year,month,day);
 			cout<<"0	Success."<<endl;
 			return 1;
 		}
 		else if(resource_type=="Magazine")
 		{
-			if(resource_magazine.req_borrow(resource_name,year,month,day)==0)
+			if(resource_magazine.req_borrow(resource_name,"magazine",year,month,day)==0)
 			{
 				return 0;
 			}
-			(member_graduate.at(temp)).borrow_resource(resource_name,"Magazine",year,month,day);
+			(member_graduate.at(temp)).borrow_resource(resource_name,resource_type,year,month,day);
 			cout<<"0	Success."<<endl;
 			return 1;
 		}
@@ -183,7 +183,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			return 0;
 		if(resource_type=="Book")
 		{
-			if(resource_book.req_borrow(resource_name,year,month,day)==0)
+			if(resource_book.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
 			}
@@ -193,7 +193,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="E_book")
 		{
-			if(resource_ebook.req_borrow(resource_name,year,month,day)==0)
+			if(resource_ebook.req_borrow(resource_name,"ebook",year,month,day)==0)
 			{
 				return 0;
 			}
@@ -203,7 +203,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="Magazine")
 		{
-			if(resource_magazine.req_borrow(resource_name,year,month,day)==0)
+			if(resource_magazine.req_borrow(resource_name,"magazine",year,month,day)==0)
 			{
 				return 0;
 			}
