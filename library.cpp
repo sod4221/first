@@ -3,6 +3,7 @@
 
 void library :: init() //resource download
 {
+	freopen("output2.dat","w",stdout);
 	cout.fill('0');
 	ifstream read_resource;
 	read_resource.open("resource.dat");
@@ -15,7 +16,7 @@ void library :: init() //resource download
 	magazine_number=0;
 	ebook_number=0;
 	string temp_type,temp_name;
-	cout<<temp_type<<temp_name<<endl;
+//	cout<<temp_type<<temp_name<<endl;
 	do
 	{
 		temp_type.clear();
@@ -49,7 +50,7 @@ void library :: init() //resource download
 
 int library :: request_borrow(string member_name,string member_type,string resource_name,string resource_type,int year,int month,int day)
 {
-	cout<<"request_borrow!!!"<<endl;
+//	cout<<"request_borrow!!!"<<endl;
 	int temp;
 	int check=0;
 
@@ -83,18 +84,18 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	}
 	else
 	{
-		cout<<"resource type error 1"<<resource_type<<endl;
+//		cout<<"resource type error 1"<<resource_type<<endl;
 		return 0;
 	}
 
 
 	if(member_type=="Undergraduate")
 	{
-		cout<<"Undergraduate!!"<<endl;
+//		cout<<"Undergraduate!!"<<endl;
 		for(temp=0;temp<undergraduate_number;temp++)  //find member
 		{
 			check = (member_undergraduate.at(temp)).check_name(member_name,1);
-			cout<<"check!!    "<<check<<endl;
+//			cout<<"check!!    "<<check<<endl;
 			if(check==1 || check==-1)
 			{
 				break;
@@ -102,17 +103,24 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		if(check<0)  //you already borrow something
 		{
-			cout<<"check!!"<<check<<endl;
+			if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
+				return 0;
+			else
+				cout<<"2	Exceeds your possible number of borrow. Possible # of borrows: "<<limit_undergraduate<<endl;
+//			cout<<"check!!"<<check<<endl;
 			return 0;
 		}
 //		cout<<"check is"<<check<<temp<<endl;
-		if(check==0) //there is no member reg
+		else if(check==0) //there is no member reg
 		{
-			cout<<"---------------member add----------"<<endl;
+//			cout<<"---------------member add----------"<<endl;
 			undergraduate_number++;
 			undergraduate t;
 			t.init(member_name);
 			member_undergraduate.push_back(t);
+		}
+		else
+		{
 		}
 		
 		if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
@@ -152,7 +160,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else
 		{
-			cout<<resource_type<<" resource type error"<<endl;
+	//		cout<<resource_type<<" resource type error"<<endl;
 			return 0;
 		}					
 	}
@@ -272,14 +280,14 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	}
 	else
 	{
-		cout<<member_type<<"member_type error"<<endl;
+//		cout<<member_type<<"member_type error"<<endl;
 		return 0;
 	}
 
 }
 int library :: request_return(string member_name,string member_type,string resource_name,string resource_type,int year,int month,int day)
 {
-	cout<<"request_return!!!"<<endl;
+//	cout<<"request_return!!!"<<endl;
 	int temp;
 	int check=0;
 
@@ -313,7 +321,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	}
 	else
 	{
-		cout<<"resource type error 1"<<resource_type<<endl;
+	//	cout<<"resource type error 1"<<resource_type<<endl;
 		return 0;
 	}
 
@@ -331,7 +339,7 @@ int library :: request_return(string member_name,string member_type,string resou
 		}
 		if(check==0)
 		{
-			cout<<"there is no people who has name "<<member_name<<endl;
+//			cout<<"there is no people who has name "<<member_name<<endl;
 			return 0;
 		}
 		check = member_undergraduate.at(temp).return_resource(resource_name,resource_type,year,month,day);
@@ -352,7 +360,7 @@ int library :: request_return(string member_name,string member_type,string resou
 		}
 		if(check==0)
 		{
-			cout<<"there is no people who has name "<<member_name<<endl;
+//			cout<<"there is no people who has name "<<member_name<<endl;
 			return 0;
 		}
 		(member_graduate.at(temp)).return_resource(resource_name,resource_type);
@@ -371,7 +379,7 @@ int library :: request_return(string member_name,string member_type,string resou
 		}
 		if(check==0)
 		{
-			cout<<"there is no people who has name "<<member_name<<endl;
+//			cout<<"there is no people who has name "<<member_name<<endl;
 			return 0;
 		}
 		member_faculty.at(temp).return_resource(resource_name,resource_type);
@@ -380,7 +388,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	}
 	else
 	{
-		cout<<"member_type error "<<member_type<<endl;
+//		cout<<"member_type error "<<member_type<<endl;
 		return 0;
 	}
 
@@ -407,7 +415,7 @@ int library :: input()
 {
 	ifstream read_input;
 	read_input.open("input.dat");
-	cout<<"input start!"<<endl;
+//	cout<<"input start!"<<endl;
 	int t=1;
 	int year;
 	int month;
@@ -429,7 +437,7 @@ int library :: input()
 		if(resource_type.size()!=0)
 		{
 //			cout<<"if station!"<<endl;
-			cout<<"t	"<<t<<endl;;
+			cout<<t<<"	";
 			t++;
 			stringstream ss(date);
 			int temp;
@@ -444,12 +452,12 @@ int library :: input()
 			
 			if(operation=='B')
 			{
-				cout<<"operation is B"<<endl;
+//				cout<<"operation is B"<<endl;
 				request_borrow(member_name,member_type,resource_name,resource_type,year,month,day);
 			}
 			else if(operation=='R')
 			{					
-				cout<<"operation is R"<<endl;
+//				cout<<"operation is R"<<endl;
 				request_return(member_name,member_type,resource_name,resource_type,year,month,day);					
 			}
 			else

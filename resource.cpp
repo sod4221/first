@@ -10,7 +10,7 @@ int resource :: add_resource(string source_name)
 }
 int resource :: check_name(string n,int x)
 {
-	cout<<"resource_check_name"<<endl;
+//	cout<<"resource_check_name"<<endl;
 	int temp;
 	int check=0;
 	int limit = year.size();
@@ -24,7 +24,7 @@ int resource :: check_name(string n,int x)
 	}
 	if(check==0)
 	{
-		cout<<"1 Non exist resource."<<endl;
+		cout<<"1	Non exist resource."<<endl;
 		return 0;
 	}
 	else
@@ -79,7 +79,7 @@ int resource :: req_borrow(string resource_name,string resource_type,int y,int m
 	}
 	else
 	{
-		cout<<"5	other member already borrwed "<<resource_type<<". This "<<resource_type<<" will be returned at";
+		cout<<"5	Other member already borrwed this "<<resource_type<<". This "<<resource_type<<" will be returned at ";
 		cout.width(2);
 		cout<<year.at(temp);
 		cout<<"/";
@@ -113,7 +113,7 @@ int resource :: req_return(string resource_name)
 	}
 	else
 	{
-		cout<<"this book is not borrowed"<<endl;
+	//	cout<<"this book is not borrowed"<<endl;
 		return 0;
 	}
 }

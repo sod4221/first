@@ -21,6 +21,7 @@ int member :: check_name(string check_name)
 
 int member :: check_borrow(string source_name,string source_type)
 {
+//	cout<<"check_borrow"<<endl;
 	int temp;
 	for(temp=0;temp<borrow_number;temp++)
 	{
@@ -35,7 +36,7 @@ int member :: check_borrow(string source_name,string source_type)
 
 int member :: borrow_resource(string resource_name,string resource_type,int y,int m,int d)
 {
-	cout<<"borrow_resource"<<endl;	
+//	cout<<"borrow_resource"<<endl;	
 	borrow.push_back(resource_name);
 	borrow_type.push_back(resource_type);
 	day.push_back(d);
@@ -59,7 +60,7 @@ int member :: return_resource(string resource_name,string resource_type)
 	}
 	if(check==0)
 	{
-		cout<<"3	you did not borrow this book"<<endl;
+		cout<<"3	You did not borrow this book"<<endl;
 		return 0;
 	}
 	else
@@ -89,12 +90,13 @@ void undergraduate :: init(string user_name)
 
 int undergraduate :: check_name(string n,int x)
 {
-	cout<<borrow_number<<"undergraduate_check_name"<<x<<endl;
+//	cout<<borrow_number<<"undergraduate_check_name"<<x<<endl;
 	if(name==n)
 	{
-		if((borrow_number>=limit_undergraduate) && (x==1))
+		if((borrow_number>=limit_undergraduate) && (x==1)) //when borrow
 		{
-			cout<<borrow_number<<"2	Exceeds your possible number of borrow. Possible # of borrows: "<<limit_undergraduate<<endl;
+//			cout<<"2	Exceeds your possible number of borrow. Possible # of borrows: "<<limit_/
+//			undergraduate<<endl;
 			return -1; //error
 		}
 		else
@@ -106,12 +108,12 @@ int undergraduate :: check_name(string n,int x)
 
 int undergraduate :: check_delay(int y,int m,int d)
 {
-	cout<<"check_delay"<<endl;
+//	cout<<"check_delay"<<endl;
 	int delay = (y-delay_year)*360 + (m-delay_month)*30+(d-delay_day);
-	cout<<"delay is"<<delay<<endl;
+//	cout<<"delay is"<<delay<<endl;
 	if(delay<=0)
 	{
-		cout<<"6	restricted member until ";
+		cout<<"6	Restricted member until ";
 		cout.width(2);
 		cout<<delay_year;
 		cout<<"/";
@@ -127,7 +129,7 @@ int undergraduate :: check_delay(int y,int m,int d)
 }
 int undergraduate :: borrow_resource(string resource_name,string resource_type,int y,int m,int d)
 {
-	cout<<"borrow_resource"<<endl;
+//	cout<<"borrow_resource"<<endl;
 	if(borrow_number==1)
 	{
 		cout<<"2	Exceeds your possible number of borrow. Possible # of borrows:"<<limit_undergraduate<<endl;
@@ -150,7 +152,7 @@ int undergraduate :: return_resource(string resource_name,string resource_type,i
 	int return_value = 1;
 	if(borrow_number==0)
 	{
-		cout<<"3	you did not borrow this "<<resource_type<<"."<<endl;
+		cout<<"3	You did not borrow this "<<resource_type<<"."<<endl;
 		return 0;
 	}
 	else
@@ -160,7 +162,7 @@ int undergraduate :: return_resource(string resource_name,string resource_type,i
 		{
 			int temp_delay=0;
 			temp_delay = (y-year.at(0))*360+(m-month.at(0))*30+(d-day.at(0))-13;
-			cout<<"delay is  "<<temp_delay<<endl;
+//			cout<<"delay is  "<<temp_delay<<endl;
 			if(temp_delay<=0)
 			{
 				delay_year = 0;
@@ -186,7 +188,7 @@ int undergraduate :: return_resource(string resource_name,string resource_type,i
 			return_value = -1;
 			}
 			borrow_number = 0;
-			cout<<"undergraduate return success"<<endl;
+//			cout<<"undergraduate return success"<<endl;
 			borrow_type.pop_back();
 			borrow.pop_back();
 			day.pop_back();
