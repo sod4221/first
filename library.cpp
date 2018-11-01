@@ -3,7 +3,7 @@
 
 void library :: init() //resource download
 {
-	freopen("output2.dat","w",stdout);
+	freopen("output.dat","w",stdout);
 	cout.fill('0');
 	ifstream read_resource;
 	read_resource.open("resource.dat");

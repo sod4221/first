@@ -1,23 +1,32 @@
-# What is Redis?
+# library management
 
-## Redis is often referred as a ***data strctures*** server.
+## class hierarchy
+- library
+	- member
+		- undergraduate
+		- graduate
+		- faculty
+	- resource
+		- book
+		- magazine
+		- e_book
 
-# Building Redis
+
+
+# how to compile
 
 - It is simple.just type 'make'
+	- when you type 'make' you get compile result named 'main'
+	- before you run 'main' you need 'input.dat' and 'resource.dat' file
 
+- If you want to remove compile byproduct and product, you just type
 ```
-% make
+% make clean
 ```
+- This project is made in Ubuntu 18.04.1 LTS
 
-- For 32bit machine
-	- You can run a ~~64bit~~ 32bit **Redis** binary using:
 
-```
-% make 32bit
-```
-# Link
 
-[Redis](https://redis.io)
+
 
 ---------------------------------------------------------------
