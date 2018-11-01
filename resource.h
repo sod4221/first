@@ -1,7 +1,6 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
-
 using namespace std;
 class resource
 {
@@ -14,7 +13,7 @@ class resource
 
 	public:
 		int add_resource(string source_name);
-		int check_name(string n);
+		int check_name(string n,int x);
 		int req_borrow(string resource_name,string resource_type,int y,int m,int d);
 		int req_return(string resource_name);
 };

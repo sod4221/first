@@ -5,7 +5,6 @@
 #define one_year  360;
 #define one_month 30;
 const int limit_undergraduate = 1;
-
 using namespace std;
 class member
 {
@@ -38,7 +37,7 @@ class undergraduate : public member
 	
 	public:		
 		int check_delay(int y,int m,int d);
-		int check_name(string n);
+		int check_name(string n,int x);
 		int borrow_resource(string resource_name,string resource_type,int y,int m,int d);
 		int return_resource(string resource_name,string resource_type,int y,int m,int d);
 		void init(string user_name);

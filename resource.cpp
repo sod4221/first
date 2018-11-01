@@ -8,8 +8,9 @@ int resource :: add_resource(string source_name)
 	day.push_back(0);
 	borrow.push_back(0);
 }
-int resource :: check_name(string n)
+int resource :: check_name(string n,int x)
 {
+	cout<<"resource_check_name"<<endl;
 	int temp;
 	int check=0;
 	int limit = year.size();
@@ -28,7 +29,7 @@ int resource :: check_name(string n)
 	}
 	else
 	{
-		if(borrow.at(temp)==1)
+		if(borrow.at(temp)==1 && x==0)
 		{
 			int temp_y;
 			cout<<"5 Other member already borrowed this book. This book will be returned at "<<year.at(temp)<<"/"<<month.at(temp)<<"/"<<day.at(temp);
@@ -78,7 +79,15 @@ int resource :: req_borrow(string resource_name,string resource_type,int y,int m
 	}
 	else
 	{
-		cout<<"5	other member already borrwed"<<resource_type<<". This "<<resource_type<<" will be returned at"<<year.at(temp)<<"/"<<month.at(temp)<<"/"<<day.at(temp)<<endl;
+		cout<<"5	other member already borrwed "<<resource_type<<". This "<<resource_type<<" will be returned at";
+		cout.width(2);
+		cout<<year.at(temp);
+		cout<<"/";
+		cout.width(2);
+		cout<<month.at(temp);
+		cout<<"/";
+		cout.width(2);
+		cout<<day.at(temp)<<endl;
 		return 0;
 	}
 
