@@ -11,22 +11,23 @@
 		- magazine
 		- e_book
 
-
+----------------------------------------------------------------
 
 # how to compile
 
-- It is simple.just type 'make'
-	- when you type 'make' you get compile result named 'main'
-	- before you run 'main' you need 'input.dat' and 'resource.dat' file
+- It is simple. Just type this command
+```
+'make'
+```
+	- When you type "make" you get compile result named "main"
+	- Before you run "main" file,  you need files named "input.dat" and "resource.dat"
+	- After running "main", you get output file named "output.dat" 
 
 - If you want to remove compile byproduct and product, you just type
 ```
 % make clean
 ```
+--------------------------------------------------------------
 - This project is made in Ubuntu 18.04.1 LTS
-
-
-
-
 
 ---------------------------------------------------------------
