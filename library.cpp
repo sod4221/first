@@ -57,16 +57,16 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	//book check
 	if(resource_type=="Book")
 	{
-		if(resource_book.check_name(resource_name,1)==0) //borrowed
+		if(resource_book.check_name(resource_name,1)==0) //there is book named this?
 		{
 //			cout<<"it does borrowed"<<endl;
 			return 0;
 		}
 
 	}
-	else if(resource_type=="Magizine")
+	else if(resource_type=="Magazine")
 	{
-		if(resource_magazine.check_name(resource_name,1)==0) //borrowed
+		if(resource_magazine.check_name(resource_name,1)==0) //there is maga
 		{
 //			cout<<"it does not borrowed"<<endl;
 			return 0;
@@ -301,7 +301,7 @@ int library :: request_return(string member_name,string member_type,string resou
 		}
 
 	}
-	else if(resource_type=="Magizine")
+	else if(resource_type=="Magazine")
 	{
 		if(resource_magazine.check_name(resource_name,1)==0) //borrowed
 		{
@@ -396,7 +396,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	{
 		resource_book.req_return(resource_name);
 	}
-	else if(resource_type=="Magizine")
+	else if(resource_type=="Magazine")
 	{
 		resource_magazine.req_return(resource_name);
 	}
