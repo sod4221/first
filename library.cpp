@@ -57,7 +57,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	//book check
 	if(resource_type=="Book")
 	{
-		if(resource_book.check_name(resource_name,1)==0) //there is book named this?
+		if(resource_book.check_name(resource_name)==0) //there is book named this?
 		{
 //			cout<<"it does borrowed"<<endl;
 			return 0;
@@ -66,7 +66,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	}
 	else if(resource_type=="Magazine")
 	{
-		if(resource_magazine.check_name(resource_name,1)==0) //there is maga
+		if(resource_magazine.check_name(resource_name)==0) //there is maga
 		{
 //			cout<<"it does not borrowed"<<endl;
 			return 0;
@@ -75,7 +75,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	}
 	else if(resource_type=="E_book")
 	{
-		if(resource_ebook.check_name(resource_name,1)==0) //borrowed or non existed
+		if(resource_ebook.check_name(resource_name)==0) //borrowed or non existed
 		{
 //			cout<<"it does not borrowed"<<endl;
 			return 0;
@@ -294,7 +294,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	//book check
 	if(resource_type=="Book")
 	{
-		if(resource_book.check_name(resource_name,1)==0) //borrowed
+		if(resource_book.check_name(resource_name)==0) //borrowed
 		{
 //			cout<<"it does borrowed"<<endl;
 			return 0;
@@ -303,7 +303,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	}
 	else if(resource_type=="Magazine")
 	{
-		if(resource_magazine.check_name(resource_name,1)==0) //borrowed
+		if(resource_magazine.check_name(resource_name)==0) //borrowed
 		{
 //			cout<<"it does not borrowed"<<endl;
 			return 0;
@@ -312,7 +312,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	}
 	else if(resource_type=="E_book")
 	{
-		if(resource_ebook.check_name(resource_name,1)==0) //borrowed or non existed
+		if(resource_ebook.check_name(resource_name)==0) //borrowed or non existed
 		{
 //			cout<<"it does not borrowed"<<endl;
 			return 0;
@@ -406,7 +406,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	}
 	else
 	{
-		cout<<"resource type error 1"<<resource_type<<endl;
+//		cout<<"resource type error 1"<<resource_type<<endl;
 		return 0;
 	}
 }
