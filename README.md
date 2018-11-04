@@ -1,11 +1,13 @@
 # library management
 
 ## class hierarchy
+
 - library
 	- member
 		- undergraduate
 		- graduate
 		- faculty
+
 	- resource
 		- book
 		- magazine
@@ -23,11 +25,10 @@
 	- Before you run "main" file,  you need files named "input.dat" and "resource.dat"
 	- After running "main", you get output file named "output.dat" 
 
-- If you want to remove compile byproduct and product, you just type
+- If you want to remove compile byproduct and product(output.dat and main), you just type
 ```
 % make clean
 ```
 --------------------------------------------------------------
 - This project is made in Ubuntu 18.04.1 LTS
-
 ---------------------------------------------------------------
