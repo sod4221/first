@@ -48,6 +48,7 @@ void library :: init() //resource download
 	read_resource.close();
 }
 
+
 int library :: request_borrow(string member_name,string member_type,string resource_name,string resource_type,int year,int month,int day)
 {
 //	cout<<"request_borrow!!!"<<endl;
@@ -89,6 +90,9 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	}
 
 
+//resource check done
+//
+//member check
 	if(member_type=="Undergraduate")
 	{
 //		cout<<"Undergraduate!!"<<endl;
@@ -96,12 +100,16 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		{
 			check = (member_undergraduate.at(temp)).check_name(member_name,1);
 //			cout<<"check!!    "<<check<<endl;
-			if(check==1 || check==-1)
+			if(check==1)
 			{
 				break;
 			}
+			if(check==-1)
+			{
+				return 0; //exceed number of borrow
+			}
 		}
-		if(check<0)  //you already borrow something
+		if(check<0)  //you already borrow something so you exceed number of borrow
 		{
 			if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
 				return 0;
@@ -111,7 +119,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			return 0;
 		}
 //		cout<<"check is"<<check<<temp<<endl;
-		else if(check==0) //there is no member reg
+		if(check==0) //there is no member reg
 		{
 //			cout<<"---------------member add----------"<<endl;
 			undergraduate_number++;
@@ -119,10 +127,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			t.init(member_name);
 			member_undergraduate.push_back(t);
 		}
-		else
-		{
-		}
-		
+				
 		if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
 			return 0;
 

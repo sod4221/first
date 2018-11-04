@@ -52,8 +52,7 @@ int member :: return_resource(string resource_name,string resource_type)
 	int check=0;
 	for(temp=0;temp<borrow_number;temp++)
 	{	
-		if(borrow.at(temp)==resource_name)
-		{
+		if(borrow.at(temp)==resource_name){
 			check = 1;
 			break;
 		}
@@ -95,8 +94,7 @@ int undergraduate :: check_name(string n,int x)
 	{
 		if((borrow_number>=limit_undergraduate) && (x==1)) //when borrow
 		{
-//			cout<<"2	Exceeds your possible number of borrow. Possible # of borrows: "<<limit_/
-//			undergraduate<<endl;
+			cout<<"2	Exceeds your possible number of borrow. Possible # of borrows: "<<limit_undergraduate<<endl;
 			return -1; //error
 		}
 		else
