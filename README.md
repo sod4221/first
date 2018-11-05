@@ -31,8 +31,8 @@
 		1. resource existance check -> error number : 1
 			- function : check_name(declared in resource class)
 		2. borrowed check and delay check -> error number is 3 and 7
-			-function : return_resource(declared in member and redeclared in undergraduate)
-			-Error 7 is only for undergraduate
+			- function : return_resource(declared in member and redeclared in undergraduate)
+			- Error 7 is only for undergraduate
 
 ----------------------------------------------------------------
 
