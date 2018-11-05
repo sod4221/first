@@ -13,7 +13,7 @@
 		- magazine
 		- e_book
 
-- Flow
+## Flow
 	- Borrow
 		1. resource existance check-> error number : 1
 			- function : check_name(declared in resource class)
@@ -36,19 +36,19 @@
 
 ----------------------------------------------------------------
 
-# How to compile
+## How to compile
 
 - It is simple. Just type this command
 ```
 'make'
 ```
-# How to use
+## How to use
 
 	1. When you type "make" you get compile result named "main"
 	2. Before you run "main" file,  you need files named "input.dat" and "resource.dat"
 	3. After running "main", you get output file named "output.dat" 
 
-# How to remove
+## How to remove
 
 - If you want to remove compile byproduct and product(named "main"), you just type
 ```
