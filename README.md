@@ -15,15 +15,15 @@
 
 - Flow
 	- Borrow
-		1.resource existance check (function named check_name)
-		2.undergraduate check (whether exceed or not by function named check_name)
-		3.undergraduate check (already borrow this resource or not)
-		3.resource borrowed check (whether borrowed already or not by function named check_borrow)
-		4.restrict check(by check_delay)
+		1. resource existance check (function named check_name)
+		2. undergraduate check (whether exceed or not by function named check_name)
+		3. undergraduate check (already borrow this resource or not)
+		3. resource borrowed check (whether borrowed already or not by function named check_borrow)
+		4. restrict check(by check_delay)
 
 	- Return
-		1.resource existance check(function named check_name)
-		2.borrowed check and delay check(borrowed or not by function named return_resource)
+		1. resource existance check(function named check_name)
+		2. borrowed check and delay check(borrowed or not by function named return_resource)
 
 ----------------------------------------------------------------
 
