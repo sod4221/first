@@ -20,7 +20,7 @@ resoucre.o : resource.cpp
 	$(CXX) $(CXXFLAGS) -c $^
 
 clean:
-	rm -f *.o main .*.swp
+	rm -f *.o main .*.swp 
 
 
 

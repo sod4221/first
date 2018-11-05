@@ -30,6 +30,40 @@ int resource :: check_name(string n)
 	return 1;
 
 }
+int resource :: check_borrow(string resource_name,string resource_type)
+{
+	int temp;
+	int limit =year.size();
+	for(temp=0;temp<limit;temp++)
+	{
+		if(name.at(temp)==resource_name)
+		{
+			break;
+		}
+	}
+	if(borrow.at(temp) == 0)
+	{
+		return 1;
+	}
+	else
+	{
+		cout<<"5	Other member already borrwed this "<<resource_type<<". This "<<resource_type<<" will be returned at ";
+		cout.width(2);
+		cout<<year.at(temp);
+		cout<<"/";
+		cout.width(2);
+		cout<<month.at(temp);
+		cout<<"/";
+		cout.width(2);
+		cout<<day.at(temp)<<endl;
+		return 0;
+	}
+
+
+
+}
+
+
 int resource :: req_borrow(string resource_name,string resource_type,int y,int m,int d)
 {
 	int temp;
@@ -66,15 +100,6 @@ int resource :: req_borrow(string resource_name,string resource_type,int y,int m
 	}
 	else
 	{
-		cout<<"5	Other member already borrwed this "<<resource_type<<". This "<<resource_type<<" will be returned at ";
-		cout.width(2);
-		cout<<year.at(temp);
-		cout<<"/";
-		cout.width(2);
-		cout<<month.at(temp);
-		cout<<"/";
-		cout.width(2);
-		cout<<day.at(temp)<<endl;
 		return 0;
 	}
 

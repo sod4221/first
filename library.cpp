@@ -55,7 +55,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 	int temp;
 	int check=0;
 
-	//book check
+	//1	non check
 	if(resource_type=="Book")
 	{
 		if(resource_book.check_name(resource_name)==0) //there is book named this?
@@ -109,16 +109,6 @@ int library :: request_borrow(string member_name,string member_type,string resou
 				return 0; //exceed number of borrow
 			}
 		}
-		if(check<0)  //you already borrow something so you exceed number of borrow
-		{
-			if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
-				return 0;
-			else
-				cout<<"2	Exceeds your possible number of borrow. Possible # of borrows: "<<limit_undergraduate<<endl;
-//			cout<<"check!!"<<check<<endl;
-			return 0;
-		}
-//		cout<<"check is"<<check<<temp<<endl;
 		if(check==0) //there is no member reg
 		{
 //			cout<<"---------------member add----------"<<endl;
@@ -127,14 +117,21 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			t.init(member_name);
 			member_undergraduate.push_back(t);
 		}
-				
+		//4	already borrow check		
 		if(member_undergraduate.at(temp).check_borrow(resource_name,resource_type)==0)
-			return 0;
-
-		if(member_undergraduate.at(temp).check_delay(year,month,day)==-1)
 			return 0;
 		if(resource_type=="Book")
 		{
+			//5 other member borrow check
+			if(resource_book.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+			//6	restrict check
+			if(member_undergraduate.at(temp).check_delay(year,month,day)==-1)
+				return 0;
+
 			if(resource_book.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
@@ -145,6 +142,17 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="E_book")
 		{
+			//5 other member borrow check
+			if(resource_ebook.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+			//6	restrict check
+			if(member_undergraduate.at(temp).check_delay(year,month,day)==-1)
+				return 0;
+
+
 			if(resource_ebook.req_borrow(resource_name,"e_book",year,month,day)==0)
 			{
 				return 0;
@@ -155,6 +163,17 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="Magazine")
 		{
+			//5 other member borrow check
+			if(resource_magazine.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+			//6	restrict check
+			if(member_undergraduate.at(temp).check_delay(year,month,day)==-1)
+				return 0;
+
+
 			if(resource_magazine.req_borrow(resource_name,"magazine",year,month,day)==0)
 			{
 				return 0;
@@ -186,11 +205,18 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			t.init(member_name);
 			member_graduate.push_back(t);
 		}
-		
+		//4	already borrow check		
 		if(member_graduate.at(temp).check_borrow(resource_name,resource_type)==0)
 			return 0;
 		if(resource_type=="Book")
 		{
+			//5 other member borrow check
+			if(resource_book.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+
 			if(resource_book.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
@@ -201,6 +227,13 @@ int library :: request_borrow(string member_name,string member_type,string resou
 		}
 		else if(resource_type=="E_book")
 		{
+			//5 other member borrow check
+			if(resource_ebook.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+
 			if(resource_ebook.req_borrow(resource_name,"book",year,month,day)==0)
 			{
 				return 0;
@@ -210,7 +243,14 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			return 1;
 		}
 		else if(resource_type=="Magazine")
-		{
+		
+		{			//5 other member borrow check
+			if(resource_magazine.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+
 			if(resource_magazine.req_borrow(resource_name,"magazine",year,month,day)==0)
 			{
 				return 0;
@@ -244,6 +284,68 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			t.init(member_name);
 			member_faculty.push_back(t);
 		}
+		//4	already borrow check		
+		if(member_faculty.at(temp).check_borrow(resource_name,resource_type)==0)
+			return 0;
+		if(resource_type=="Book")
+		{
+			//5 other member borrow check
+			if(resource_book.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+
+			if(resource_book.req_borrow(resource_name,"book",year,month,day)==0)
+			{
+				return 0;
+			}
+			(member_faculty.at(temp)).borrow_resource(resource_name,resource_type,year,month,day);
+			cout<<"0	Success."<<endl;
+			return 1;
+		}
+		else if(resource_type=="E_book")
+		{
+			//5 other member borrow check
+			if(resource_ebook.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+
+			if(resource_ebook.req_borrow(resource_name,"book",year,month,day)==0)
+			{
+				return 0;
+			}
+			(member_faculty.at(temp)).borrow_resource(resource_name,resource_type,year,month,day);
+			cout<<"0	Success."<<endl;
+			return 1;
+		}
+		else if(resource_type=="Magazine")
+		
+		{			//5 other member borrow check
+			if(resource_magazine.check_borrow(resource_name,"book")==0)
+			{
+//				cout<<"check_book_borrow"<<endl;
+				return 0;
+			}
+
+			if(resource_magazine.req_borrow(resource_name,"magazine",year,month,day)==0)
+			{
+				return 0;
+			}
+			(member_faculty.at(temp)).borrow_resource(resource_name,resource_type,year,month,day);
+			cout<<"0	Success."<<endl;
+			return 1;
+		}
+		else
+		{
+			cout<<resource_type<<" resource type error"<<endl;
+			return 0;
+		}					
+
+	}
+/*
 		if(member_faculty.at(temp).check_borrow(resource_name,resource_type)==0)
 			return 0;
 		if(resource_type=="Book")
@@ -282,7 +384,7 @@ int library :: request_borrow(string member_name,string member_type,string resou
 			return 0;
 		}					
 
-	}
+	}*/
 	else
 	{
 //		cout<<member_type<<"member_type error"<<endl;
