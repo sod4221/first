@@ -38,9 +38,7 @@
 
 ## How to compile
 
-- It is simple. Just type this command
-
-`make`
+- It is simple. Just type this command `make`
 
 ## How to use
 
@@ -50,9 +48,8 @@
 
 ## How to remove
 
-- If you want to remove compile byproduct and product(named "main"), you just type
+- If you want to remove compile byproduct and product(named "main"), you just type `% make clean`
 
-`% make clean`
 --------------------------------------------------------------
 - This project is made in Ubuntu 18.04.1 LTS
 ---------------------------------------------------------------
