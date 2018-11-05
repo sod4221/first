@@ -18,12 +18,15 @@ class resource
 		int req_borrow(string resource_name,string resource_type,int y,int m,int d);
 		int req_return(string resource_name);
 };
+
 class book : public resource
 {
 };
+
 class magazine : public resource
 {
 };
+
 class e_book : public resource
 {
 };

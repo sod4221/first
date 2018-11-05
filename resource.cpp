@@ -125,7 +125,6 @@ int resource :: req_return(string resource_name)
 	}
 	else
 	{
-	//	cout<<"this book is not borrowed"<<endl;
 		return 0;
 	}
 }
