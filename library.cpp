@@ -569,7 +569,7 @@ int library :: input()
 			}
 			else
 			{
-				cout<<"error"<<endl;
+//				cout<<"error"<<endl;
 			}
 		}
 	}while(resource_type.size()!=0);
