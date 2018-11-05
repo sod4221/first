@@ -39,9 +39,9 @@
 ## How to compile
 
 - It is simple. Just type this command
-```
-'make'
-```
+
+`make`
+
 ## How to use
 
 	1. When you type "make" you get compile result named "main"
@@ -51,9 +51,8 @@
 ## How to remove
 
 - If you want to remove compile byproduct and product(named "main"), you just type
-```
-% make clean
-```
+
+`% make clean`
 --------------------------------------------------------------
 - This project is made in Ubuntu 18.04.1 LTS
 ---------------------------------------------------------------
