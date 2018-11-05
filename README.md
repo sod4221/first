@@ -17,7 +17,7 @@
 	- Borrow
 		1. resource existance check (function named check_name)
 		2. undergraduate check (whether exceed or not by function named check_name)
-		3. undergraduate check (already borrow this resource or not)
+		3. undergraduate check (already borrow this resource or not by function named check_borrow)
 		3. resource borrowed check (whether borrowed already or not by function named check_borrow)
 		4. restrict check(by check_delay)
 
@@ -37,7 +37,7 @@
 	- Before you run "main" file,  you need files named "input.dat" and "resource.dat"
 	- After running "main", you get output file named "output.dat" 
 
-- If you want to remove compile byproduct and product(output.dat and main), you just type
+- If you want to remove compile byproduct and product(named "main"), you just type
 ```
 % make clean
 ```
