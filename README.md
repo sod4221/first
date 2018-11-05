@@ -36,17 +36,19 @@
 
 ----------------------------------------------------------------
 
-# how to compile
+# How to compile
 
 - It is simple. Just type this command
 ```
 'make'
 ```
+# How to use
 
-	- When you type "make" you get compile result named "main"
-	- Before you run "main" file,  you need files named "input.dat" and "resource.dat"
-	- After running "main", you get output file named "output.dat" 
+	1. When you type "make" you get compile result named "main"
+	2. Before you run "main" file,  you need files named "input.dat" and "resource.dat"
+	3. After running "main", you get output file named "output.dat" 
 
+# How to remove
 
 - If you want to remove compile byproduct and product(named "main"), you just type
 ```
