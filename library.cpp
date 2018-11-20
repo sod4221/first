@@ -714,22 +714,35 @@ int library :: input()
 			if(op=="B"){
 				cout>>sm_number>>borrow_time;
 				smember_number.push_back(sm_number);
-				smember_number.push_back(borrow_time);
+				space_time.push_back(borrow_time);
 			}
 			else
 			{
 				smember_number.push_back(-1);
-				smember_number.push_back(-1);
+				space_time.push_back(-1);
 			}
 
 		}
 	}while(s_type.size()!=0);
-
+	int t = 1;
 	do
 	{
-			//space start
-		if(space_year.front()<resource_year.front() && space_month.front()<resource_month.front() && space_day.front()<resource_day.front())
+
+		if(space_year.size()==0 && resource_year.size()!=0)
+			goto resource;
+		else if(space_year.size()!=0 && resource_year.size()==0)
+			goto space;
+		else if(space_year.size()==0 && resource_year.size()==0)
+			goto end;
+		else{
+		}
+	
+			//space first start
+		if(space_year.front()<=resource_year.front() && space_month.front()<=resource_month.front() && space_day.front()<=resource_day.front())
 		{
+			resource:
+			cout<<t<<"	";
+			t++;
 			if(resource_operation.front()=="B")
 			{
 				request_borrow(member_name.front(),member_type.front(),resource_name.fornt(),resource_type.front(),resource_year.front(),resource_month.front(),resource_day.front());
@@ -740,107 +753,176 @@ int library :: input()
 
 				request_return(member_name.front(),member_type.front(),resource_name.fornt(),resource_type.front(),resource_year.front(),resource_month.front(),resource_day.front());
 
+
 			}
 			else
 			{
 				cout<<"ERROR"<<endl;
 			}
+			//pop
+			member_name.pop();
+			member_type.pop();
+			resource_name.pop();
+			resource_type.pop();
+			resource_year.pop();
+			resource_month.pop();
+			resource_day.pop();
+
+
+
 		}
 		//resource start
 		else
 		{
-			if(space_operation.front()=="B")
-			{
+				space:
+				cout<<t<<"	";
+				t++;
 				if(space_type.front()=="Studyroom")
 				{
 
+					if(space_number.front()<0 || space_number.front()>10){
+						cout<<"8	Invalid space Id."<<endl;
+						return 0;
+					}
+
+					if(space_hour.front()<9 || space_hour.front()>=18){
+						cout<<"9	This space is not available now. Available from 09 to 18."<<endl;
+						return 0;
+					}
+					if(space_operation.front()=="B")
+					{
+
+						if(smemeber_number.front()>6)
+						{
+							cout<<"12 Exceed available number."<<endl;
+							return 0;
+						}
+						if(borrow_time.front()>3)
+						{
+							cout<<"13 Exceed available time."<<endl;
+							return 0;
+						}
+
+						cout<<"0	Success."<<endl;
+
+					}
+					else if(space_operation.front()=="R")
+					{
 
 
+					}
+					else if(space_operation.front()=="E")
+					{
+
+
+					}
+					else if(space_operation.front()=="C")
+					{
+
+
+					}
+					else
+					{
+						cout<<"ERROR"<<endl;
+					}
 				}
+
 				else if(space_type.front()=="Seat")
 				{
+					if(space_number.front()==1)
+					{
+						if(space_operation.front()=="B")
+						{
+
+						}
+						else if(space_operation.front()=="R")
+						{
+
+						}
+						else if(space_operation.front()=="E")
+						{
+
+						}
+						else if(space_operation.front()=="C")
+						{
+
+						}
+						else
+						{
+							cout<<"ERROR"<<endl;
+						}
+
+					}
+					else if(space_number.front()==2)
+					{
+						if(space_hour.front()<9 || space_hour.front()>=21){
+							cout<<"9	This space is ont available now. Available from 09 to 18."<<endl;
+							return 0;
+						}
+						if(space_operation.front()=="B")
+						{
+
+						}
+						else if(space_operation.front()=="R")
+						{
+
+						}
+						else if(space_operation.front()=="E")
+						{
+
+						}
+						else if(space_operation.front()=="C")
+						{
+
+						}
+						else
+						{
+							cout<<"ERROR"<<endl;
+						}
+
+					}
+					else if(space_number.front()==3)
+					{
+						if(space_hour.front()<9 || space_hour.front()>=18){
+							cout<<"9	This space is ont available now. Available from 09 to 18."<<endl;
+							return 0;
+						}
+						if(space_operation.front()=="B")
+						{
+			
+
+						}
+						else if(space_operation.front()=="R")
+						{
+
+
+						}
+						else if(space_operation.front()=="E")
+						{
+
+
+						}
+						else if(space_operation.front()=="C")
+						{
+
+
+						}
+						else
+						{
+							cout<<"ERROR"<<endl;
+						}
+					}
+					else
+					{
+						cout<<"8	Invalid space Id."<<endl;
+						return 0
+					}
+				
 
 				}
-				else
-				{
-					cout<<"type error"<<endl;
-
-				}
-
+						cout<<"0	Success."<<endl;
 			}
-			else if(space_operation.front()=="R")
-			{
-				if(space_type.front()=="Studyroom")
-				{
-
-
-
-				}
-				else if(space_type.front()=="Seat")
-				{
-
-				}
-				else
-				{
-					cout<<"type error"<<endl;
-
-				}
-
-
-
-			}
-			else if(space_operation.front()=="E")
-			{
-				if(space_type.front()=="Studyroom")
-				{
-
-
-
-				}
-				else if(space_type.front()=="Seat")
-				{
-
-
-				}
-				else
-				{
-					cout<<"type error"<<endl;
-
-				}
-
-
-
-			}
-			else if(space_operation.front()=="C")
-			{
-				if(space_type.front()=="Studyroom")
-				{
-
-
-
-				}
-				else if(space_type.front()=="Seat")
-				{
-
-				}
-				else
-				{
-					cout<<"type error"<<endl;
-
-				}
-
-
-
-			}
-			else
-			{
-				cout<<"ERROR"<<endl;
-			}
-
-
-		}
-
-
+end:
 
 	}
 	while(resource_year.size()!=0||space_year.size()!=0)
