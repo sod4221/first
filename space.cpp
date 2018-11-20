@@ -26,9 +26,27 @@ class study_room : public space
 {
 	public:
 		
-		int borrow_space(string name, string type,int room_number, int time )	
+		int borrow_space(string name,string type,int room_number,int member_number,int y,int m,int d,int h,int time )	
 		{
-
+			if(room_borrow[room_number]==1)
+			{
+				return end_hour[room_number];
+			}
+			else
+			{
+				remain --;
+				room_borrow[room_number]=1;
+				room_borrow_name[room_number]=name;
+				room_borrow_type[room_number]=type;
+				year[room_number] = y;
+				month[room_number] = m;
+				day[room_number] = d;
+				hour[room_number] = h;
+				end_hour[room_number] = h+time;
+				if(end_hour[room_number]>18)
+					end_hour[room_number]=18;
+				return 0;
+			}
 		}
 		int return_space(string name,string type, int roome_number)
 		{

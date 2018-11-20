@@ -802,9 +802,19 @@ int library :: input()
 							cout<<"13 Exceed available time."<<endl;
 							return 0;
 						}
+						int check = studyroom.borrow_space(smember_name.front(),smember_type.front(),space_number.front(),smember_number.front(),space_time.front());
+						if(check==0){
+							cout<<"0	Success."<<endl;
 
-						cout<<"0	Success."<<endl;
 
+							return0;
+						}
+						else
+						{
+							cout<<"14 This is no remain space. This space is available after "<<check<<endl;
+							return 0;
+						}
+						return 0;
 					}
 					else if(space_operation.front()=="R")
 					{
