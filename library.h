@@ -10,7 +10,8 @@
 class library
 {
 	private:
-		
+		seat first_seat,second_seat,third_seat;
+		study_room study_room;
 		vector<undergraduate> member_undergraduate;
 		vector<graduate> member_graduate;
 		vector<faculty> member_faculty;

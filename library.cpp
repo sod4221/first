@@ -517,38 +517,32 @@ int library :: request_return(string member_name,string member_type,string resou
 		return 0;
 	}
 }
-
-int library :: input()
+int library :: space_input()
 {
-	ifstream read_input;
-	read_input.open("input.dat");
-//	cout<<"input start!"<<endl;
-	int t=1;
-	int year;
-	int month;
-	int day;
+/*	ifstream read_input;
+	read_input.open("space.dat");
+	int year,b_year;
+	int month,b_month;
+	int day,b_day;
+	int time;
 	string date;
-	string resource_type;
-	string resource_name;
+	string space_type;
+	string space_number;
 	char operation;
+	int member_number,time;
 	string member_type;
 	string member_name;
-	read_input>>date>>resource_type>>resource_name>>member_type>>member_type>>member_name;
-	cout<<"Op_#	Return_code	Description"<<endl;
+	for(int i=0;i<7;i++)
+		read_input>>date; //
+	cout<<"Op_#	Return_code Description"<<endl;
 	do
 	{
-		resource_type.clear();
-		read_input>>date>>resource_type>>resource_name>>operation>>member_type>>member_name;
-
-	
-		if(resource_type.size()!=0)
-		{
-//			cout<<"if station!"<<endl;
+		member_name.clear();
+		read_input>>date>>space_type>>space_number>>operation>>member_type>>member_name;
+		if(member_name.size()!=0){
 			cout<<t<<"	";
 			t++;
 			stringstream ss(date);
-			int temp;
-//			cout<<date<<endl;
 			ss>>year;
 			date.erase(0,3);
 			ss.str(date);
@@ -556,23 +550,301 @@ int library :: input()
 			date.erase(0,3);
 			ss.str(date);
 			ss>>day;
-			
-			if(operation=='B')
+			date.erase(0,3);
+			ss.str(date);
+			ss>>hour;
+
+			if(operation=="B")
 			{
-//				cout<<"operation is B"<<endl;
-				request_borrow(member_name,member_type,resource_name,resource_type,year,month,day);
+				read_input>>member_number>>time;
+
+				if(space_type=="Seat")
+				{
+					if(space_number==1)
+					{
+						if(year!=d_year || month!=d_month || day!=d_day)
+							//초기화
+						
+					}
+					else if(space_number==2)
+					{	
+						if(year!=d_year || month!=d_month || day!=d_day)
+							//초기화
+
+						if(hour<9 || hour>=21)
+							cout<<"9	This space is not available now. Available form 09 to 18"<<endl;
+						else
+						{
+
+
+						}
+					}
+					else if(space_number==3)
+					{
+						if(year!=d_year || month!=d_month || day!=d_day)
+							//초기화
+
+						if(hour<9 || hour>=21)
+							cout<<"9	This space is not available now. Available form 09 to 18"<<endl;
+						else
+						{
+
+
+						}
+
+					}
+					else{
+						cout<<"8	Invalid space Id."<<endl;
+					}
+
+				}
+				else if(space_type=="Studyroom")
+				{
+
+
+				} 
+				else
+				{
+					cout<<"type error"<<endl;
+				}
 			}
-			else if(operation=='R')
-			{					
-//				cout<<"operation is R"<<endl;
-				request_return(member_name,member_type,resource_name,resource_type,year,month,day);					
+			else if(operation=="R")
+			{
+
+			}
+			else if(operation =="E")
+			{
+
+			}
+			else if(operation=="C")
+			{
+
+			}
+		}
+	}
+	while(member_name.size()!=0)
+*/
+}
+int library :: input()
+{
+	int t=0;
+	ifstream read_input;
+	ifstream read_space;
+	read_input.open("input.dat");
+	read_sapce.open("space.dat");
+	vector<string>resource_type,resource_name,member_type,member_name;
+	vector<int> resource_year,resource_month,resource_day;
+	vector<char> resource_operation;
+	read_input>>date>>resource_type>>resource_name>>member_type>>member_type>>member_name;
+	for(int i=0;i<8;i++)
+		read_space>>date; 
+	cout<<"Op_#	Return_code	Description"<<endl;
+	int year,month,day,hour,s_number,sm_number,borrow_time;
+	string d,r_type,r_name,m_type,m_name;
+	string s_type;
+	char op;
+	do //resource input
+	{
+		r_type.clear();
+		read_input>>d>>r_type>>r_name>>op>>m_type>>m_name;
+
+	
+		if(resource_type.size()!=0)
+		{
+			t++;
+//			cout<<"if station!"<<endl;
+			cout<<t<<"	";
+			stringstream ss(d);
+			int temp;
+//			cout<<date<<endl;
+			ss>>year;
+			year += 2000;
+			date.erase(0,3);
+			ss.str(date);
+			ss>>month;					
+			date.erase(0,3);
+			ss.str(date);
+			ss>>day;
+			resource_year.push_back(year);
+			resource_month.push_back(month);
+			resource_day.push_back((day);
+			resource_type.push_back(r_type);
+			resource_name.push_back(r_name);
+			member_type.push_back(m_type);
+			member_name.push_back(m_name);
+			resource_operation.push_back(op);
+		}
+	}while(r_type.size()!=0);
+	vector<string> space_type,smember_type,smember_name;
+	vector<int> space_year,space_month,space_day,space_hour,space_number,smember_number,space_time;
+	vector<char> space_operation;
+	int defore_year,defore_month,defore_day,defor_hour;
+	do
+	{
+		s_type.clear();
+		read_space>>d>>s_type>>s_number>>op>>m_type>>m_name;
+	
+		if(s_type.size()!=0)
+		{
+			t++;
+//			cout<<"if station!"<<endl;
+			cout<<t<<"	";
+			stringstream ss(d);
+			int temp;
+//			cout<<date<<endl;
+			ss>>year;
+			date.erase(0,5);
+			ss.str(date);
+			ss>>month;					
+			date.erase(0,3);
+			ss.str(date);
+			ss>>day;
+			date.erase(0,3);
+			ss.str(date);
+			ss>>hour;
+			space_year.push_back(year);
+			space_month.push_back(month);
+			space_day.push_back(day);
+			space_hour.push_back(hour);
+			space_type.push_back(s_type);
+			space_number.push_back(s_number);
+			resource_operation.push_back(op);
+			smember_type.push_back(m_type);
+			smember_name.push_back(m_name);
+			if(op=="B"){
+				cout>>sm_number>>borrow_time;
+				smember_number.push_back(sm_number);
+				smember_number.push_back(borrow_time);
 			}
 			else
 			{
-//				cout<<"error"<<endl;
+				smember_number.push_back(-1);
+				smember_number.push_back(-1);
+			}
+
+		}
+	}while(s_type.size()!=0);
+
+	do
+	{
+			//space start
+		if(space_year.front()<resource_year.front() && space_month.front()<resource_month.front() && space_day.front()<resource_day.front())
+		{
+			if(resource_operation.front()=="B")
+			{
+				request_borrow(member_name.front(),member_type.front(),resource_name.fornt(),resource_type.front(),resource_year.front(),resource_month.front(),resource_day.front());
+
+			}
+			else if(resource_operation.front()=="R")
+			{
+
+				request_return(member_name.front(),member_type.front(),resource_name.fornt(),resource_type.front(),resource_year.front(),resource_month.front(),resource_day.front());
+
+			}
+			else
+			{
+				cout<<"ERROR"<<endl;
 			}
 		}
-	}while(resource_type.size()!=0);
+		//resource start
+		else
+		{
+			if(space_operation.front()=="B")
+			{
+				if(space_type.front()=="Studyroom")
+				{
+
+
+
+				}
+				else if(space_type.front()=="Seat")
+				{
+
+				}
+				else
+				{
+					cout<<"type error"<<endl;
+
+				}
+
+			}
+			else if(space_operation.front()=="R")
+			{
+				if(space_type.front()=="Studyroom")
+				{
+
+
+
+				}
+				else if(space_type.front()=="Seat")
+				{
+
+				}
+				else
+				{
+					cout<<"type error"<<endl;
+
+				}
+
+
+
+			}
+			else if(space_operation.front()=="E")
+			{
+				if(space_type.front()=="Studyroom")
+				{
+
+
+
+				}
+				else if(space_type.front()=="Seat")
+				{
+
+
+				}
+				else
+				{
+					cout<<"type error"<<endl;
+
+				}
+
+
+
+			}
+			else if(space_operation.front()=="C")
+			{
+				if(space_type.front()=="Studyroom")
+				{
+
+
+
+				}
+				else if(space_type.front()=="Seat")
+				{
+
+				}
+				else
+				{
+					cout<<"type error"<<endl;
+
+				}
+
+
+
+			}
+			else
+			{
+				cout<<"ERROR"<<endl;
+			}
+
+
+		}
+
+
+
+	}
+	while(resource_year.size()!=0||space_year.size()!=0)
+
 
 }		
 
