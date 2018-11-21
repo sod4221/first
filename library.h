@@ -24,7 +24,7 @@ class library
 		int book_number;
 		int magazine_number;
 		int ebook_number;
-		
+		int b_year,b_month,b_day,b_hour;	
 	public:	
 		void init();
 		int input();

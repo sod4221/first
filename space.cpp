@@ -134,7 +134,7 @@ class seat : public space
 		}
 		int reset_space()
 		{
-		int size = borrow_size.size();
+			int size = borrow_size.size();
 			borrow_type.erase(0,size);
 			borrow_name.erase(0,size);
 			empty.erase(0,size); // 0 is 자리비움 1 is not 자리비움
@@ -145,7 +145,7 @@ class seat : public space
 		{
 			for(int i=0;i<year.size();i++)
 			{
-				if(hour.at(i)!=hour)
+				if(empty_hour.at(i)!=hour)
 				{
 					remain++;
 					hour.erase(i);
