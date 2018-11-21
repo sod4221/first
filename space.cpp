@@ -112,12 +112,13 @@ class seat : public space
 			}
 			if(remain==0)
 			{
-				int t=24;
-				for(int i=0;i<borrow_name.size();i++)
+				int temp = 24;
+				for(int i=0;i<size;i++)
 				{
-
-
+					if(end_hour.at(i)>=0 && end_hour.at(i)<temp)
+						temp = end_hour;
 				}
+				return -temp;
 			}
 			return 0;
 		}
