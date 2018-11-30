@@ -11,6 +11,8 @@ using namespace std;
 class space
 {
 	public:
+		virtual int empty_space() = 0;
+		virtual int comeback_space() = 0;
 		virtual	int borrow_space() = 0;
 		virtual	int return_space() = 0;
 		virtual	int check_space() = 0;
@@ -26,7 +28,7 @@ class study_room : public space
 {
 	public:
 		
-		int borrow_space(string name,string type,int room_number,int member_number,int y,int m,int d,int h,int time )	
+		int borrow_space(string name,string type,int room_number,int member_number,int y,int m,int d,int h,int end_h)	
 		{
 			if(room_borrow[room_number]==1)
 			{
@@ -42,19 +44,33 @@ class study_room : public space
 				month[room_number] = m;
 				day[room_number] = d;
 				hour[room_number] = h;
-				end_hour[room_number] = h+time;
-				if(end_hour[room_number]>18)
-					end_hour[room_number]=18;
+				end_hour[room_number] = end_h;
 				return 0;
 			}
 		}
 		int return_space(string name,string type, int roome_number)
 		{
-			
+			if(room_borrow[room_number]==0 || room_borrow_name[room_number]!=name || room_borrow_type[room_number]!=type)
+			{
+				return 10;
+			}
+			else
+			{
+				room_borrow[room_number]=0;
+				return 0;
+
+			}
 		}
 		int check_space(string name,string type)
 		{
-
+			for(int i=0;i<10;i++)
+			{
+				if(room_borrow[i]==1 && room_borrow_name[i]==name && room_borrow_type[i]==type)
+					return -end_hour[i];
+				else
+					continue;
+			}
+			return 0;
 		}
 		int reset_space()
 		{
@@ -64,22 +80,34 @@ class study_room : public space
 			
 			}
 			remain = 10;
-	
 		}
-		int empty_space(int number)
+		int empty_space(string name,string type,int number,int hour)
 		{
-
+			if(room_borrow[room_number]==0 || room_borrow_name[room_number]!=name || room_borrow_type[room_number]!=type)
+			{
+				return 10;
+			}
+			else{
+				empty[number] = 1;
+				return 0;
+			}
 		}
-		int comeback_space(int number)
+		int comeback_space(string name,string type,int number)
 		{
+			if(room_borrow[room_number]==0 || room_borrow_name[room_number]!=name || room_borrow_type[room_number]!=type)
+			{
+				return 10;
+			}
 
+			empty[number] = 0;
+			return 0;
 
 		}
 	private:
 
 		string room_member_type[10];
 		string room_member_name[10];
-		
+		int empty[10];
 		int room_borrow[10];	//0 is not borrow 1 is borrow
 		int year[10];
 		int month[10];
@@ -124,29 +152,59 @@ class seat : public space
 		}
 		int borrow_space(string name, string type,int member_number,int y,int m,int d,int h,int end_h)	
 		{
+			remain--;
 			borrow_name.push_back(name);
 			borrow_type.push_back(type);
 			borrow_number.push_back(member_number);
-
+			year.push_back(y);
+			month.push_back(m);
+			day.push_back(d);
+			hour.push_back(h);
+			empty.push_back(1);
+			empty_hour.push_back(-1);
 		}
-		int return_space(string name,string type, int room_number)
+		int return_space(string name,string type)
 		{
-			
+			int temp=-1;
+			for(int i=0;i<hour.size();i++)
+			{
+				if(borrow_name.at(i)==name && borrow_type.at(i)==type)
+				{
+					temp = i;
+					break;
+				}
+			}
+			if(temp ==-1)
+			{
+				return 10;
+			}
+			remain++;
+			borrow_name.erase(temp);
+			borrow_type.erase(temp);
+			borrow_number.erase(temp);
+			year.erase(temp);
+			month.erase(temp);
+			day.erase(temp);
+			hour.erase(temp);
+			empty.erase(temp);
+			empty_hour.erase(temp);
+			return 0;
 		}
+
 		int reset_space()
 		{
 			int size = borrow_size.size();
-			borrow_type.erase(0,size);
-			borrow_name.erase(0,size);
-			empty.erase(0,size); // 0 is 자리비움 1 is not 자리비움
-			empty_hour.erase(0,size);
+			borrow_type.erase(borrow_type.begin(),borrow_type.end());
+			borrow_name.erase(borrow_name.begin(),borrow_name.end());
+			empty.erase(empty.begin(),empty.end()); // 0 is 자리비움 1 is not 자리비움
+			empty_hour.erase(empty_hour.begin(),empty_hour.end());
 			remain=50;
 		}
 		int check_empty(int hour)
 		{
 			for(int i=0;i<year.size();i++)
 			{
-				if(empty_hour.at(i)!=hour)
+				if(empty_hour.at(i)!=hour&&empty.at(i)==2)
 				{
 					remain++;
 					hour.erase(i);
@@ -163,11 +221,24 @@ class seat : public space
 					continue;
 				}
 			}
-
+			return 0;
 		}
 		int empty_space(string name,string type,int hour)
 		{
-			int temp=0;
+			int temp=-1;
+			for(int i=0;i<hour.size();i++)
+			{
+				if(borrow_name.at(i)==name && borrow_type.at(i)==type)
+				{
+					temp = i;
+					break;
+				}
+			}
+			if(temp ==-1)
+			{
+				return 10;
+			}
+			temp = 0;
 			for(;temp<borrow_time;temp++)
 			{
 				if(borrow_name.at(temp==name && borrow_type.at(temp)==type))
@@ -181,7 +252,19 @@ class seat : public space
 		}
 		int comeback_space(string name,string type)
 		{
-
+			int check=0;
+			int temp=0;
+			for(;temp<borrow_time;temp++)
+			{
+				if(borrow_name.at(temp)==name && borrow_type.at(temp)==type)
+				{
+					empty.at(temp) = 1;
+					empty_hour.at(temp) = -1;
+					return 0;
+				}
+			}
+			if(check==0)
+				return 10;
 
 		}
 	private:
