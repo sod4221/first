@@ -706,7 +706,7 @@ int library ::space_return(string space_type,int space_number,string member_type
 			cout<<"8	Invalid space Id."<<endl;
 			return -1;
 		}
-		check=studyroom.return_space(member_name,member_type);
+		check=study_room.return_space(member_name,member_type);
 		if(check!=0){
 			cout<<"10	You did not borrow this place"<<endl;
 			return -1;
@@ -831,7 +831,7 @@ int library ::space_empty(string space_type,string space_number, string member_n
 		}
 		else
 		{
-			check = studyroom.empty_space(member_name,member_type,hour);
+			check = study_room.empty_space(member_name,member_type,hour);
 			if(check==10)
 			{
 				cout<<"10	You did not borrow this place."<<endl;
@@ -854,19 +854,51 @@ int library ::space_empty(string space_type,string space_number, string member_n
 }
 int library ::space_comeback(string space_type,string space_number, string member_name, string member_type)
 {
+	int check = 0;
 	if(space_type=="Seat")
 	{
 		if(space_number==1)
 		{
-			
+			check = first_seat.comeback_space(member_name,member_type);	
+			if(check==10)
+			{
+				cout<<"10	You did not borrow this place."<<endl;
+				return -1;
+			}
+			else
+			{
+				cout<<"0	Success."<<endl;
+			}
 
 		}
-		else if(space_number==1)
+		else if(space_number==2)
 		{
+			check = second_seat.comeback_space(member_name,member_type);	
+			if(check==10)
+			{
+				cout<<"10	You did not borrow this place."<<endl;
+				return -1;
+			}
+			else
+			{
+				cout<<"0	Success."<<endl;
+			}
+
 
 		}
-		else if(space_number==1)
+		else if(space_number==3)
 		{
+			check = third_seat.comeback_space(member_name,member_type);	
+			if(check==10)
+			{
+				cout<<"10	You did not borrow this place."<<endl;
+				return -1;
+			}
+			else
+			{
+				cout<<"0	Success."<<endl;
+			}
+
 
 		}
 		else
@@ -882,6 +914,20 @@ int library ::space_comeback(string space_type,string space_number, string membe
 		{
 			cout<<"8	Invalid space Id."<<endl;
 			return 0;
+		}
+		else
+		{
+			check = study_room.comeback_space(member_name,member_type);	
+
+			if(check==10)
+			{
+				cout<<"10	You did not borrow this place."<<endl;
+				return -1;
+			}
+			else
+			{
+				cout<<"0	Success."<<endl;
+			}
 		}
 	
 	}
