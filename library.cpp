@@ -555,7 +555,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 		check = studyroom.borrow_space(member_name,member_type,space_number,member_number,year,month,day,hour,end_hour);
 		if(check!=0)
 		{
-			cout<<"14	there is no remain space. This space is available after "<<check<<"."<<endl;
+			cout<<"14	There is no remain space. This space is available after "<<check<<"."<<endl;
 			return -1;
 		}
 		else
@@ -585,12 +585,12 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			}
 			if(member_type=="Undergraduate" && time > 3)
 			{
-				cout<<"13	 Exceed available time."<<endl;
+				cout<<"13	Exceed available time."<<endl;
 				return 0;
 			}
 			if(check<0)
 			{
-				cout<<"14	there is no remain space. This space is available after "<<-check<<"."<<endl;
+				cout<<"14	There is no remain space. This space is available after "<<-check<<"."<<endl;
 				return 0;
 			}
 			end_hour = hour+time;
@@ -628,7 +628,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 				}
 				if(check2<0)
 				{
-					cout<<"14	there is no remain space. This space is available after "<<-check<<"."<<endl;
+					cout<<"14	There is no remain space. This space is available after "<<-check<<"."<<endl;
 					return 0;
 				}
 	
@@ -669,7 +669,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 				}
 				if(check3<0)
 				{
-					cout<<"14	there is no remain space. This space is available after "<<-check<<"."<<endl;
+					cout<<"14	There is no remain space. This space is available after "<<-check<<"."<<endl;
 					return 0;
 				}
 			}
@@ -1029,6 +1029,8 @@ int library :: input()
 			space_day.push_back(day);
 			space_hour.push_back(hour);
 			space_type.push_back(s_type);
+			if(s_type=="StudyRoom")
+				s_number--;
 			space_number.push_back(s_number);
 			space_operation.push_back(op);
 			smember_type.push_back(m_type);
@@ -1138,22 +1140,22 @@ int library :: input()
 			if(space_operation.at(0)=='B')
 			{
 //				cout<<"borrow"<<endl;
-				space_borrow(space_type.at(0),space_number.at(0)-1,smember_type.at(0),smember_name.at(0),smember_number.at(0),space_year.at(0),space_month.at(0),space_day.at(0),space_hour.at(0),space_time.at(0));
+				space_borrow(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0),space_year.at(0),space_month.at(0),space_day.at(0),space_hour.at(0),space_time.at(0));
 			}
 			else if(space_operation.at(0)=='R')
 			{
 ///				cout<<"return"<<endl;
-				space_return(space_type.at(0),space_number.at(0)-1,smember_type.at(0),smember_name.at(0),smember_number.at(0));
+				space_return(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0));
 			}
 			else if(space_operation.at(0)=='E')
 			{	
 //				cout<<"Empty!"<<endl;
-				space_empty(space_type.at(0),space_number.at(0)-1,smember_name.at(0),smember_type.at(0),space_hour.at(0));
+				space_empty(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0),space_hour.at(0));
 			}
 			else if(space_operation.at(0)=='C')
 			{
 //				cout<<"comeback"<<endl;
-				space_comeback(space_type.at(0),space_number.at(0)-1,smember_name.at(0),smember_type.at(0));
+				space_comeback(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0));
 			}
 			else
 			{
