@@ -105,7 +105,7 @@ int seat:: check_space(string name,string type)
 }
 int seat:: borrow_space(string name, string type,int member_number,int y,int m,int d,int h,int end_h)	
 {
-	cout<<"seat borrow!!"<<endl;
+//	cout<<"seat borrow!!"<<endl;
 	remain--;
 	borrow_name.push_back(name);
 	borrow_type.push_back(type);
@@ -148,7 +148,7 @@ int seat:: return_space(string name,string type)
 
 int seat:: reset_space()
 {
-	cout<<"reset!"<<endl;
+//	cout<<"reset!"<<endl;
 	borrow_type.erase(borrow_type.begin(),borrow_type.end());
 	borrow_name.erase(borrow_name.begin(),borrow_name.end());
 	empty.erase(empty.begin(),empty.end()); // 0 is 자리비움 1 is not 자리비움
@@ -159,10 +159,10 @@ int seat:: reset_space()
 }
 int seat:: check_empty(int h)
 {
-	cout<<"check empty remain"<<remain<<endl;
+//	cout<<"check empty remain"<<remain<<endl;
 	for(int temp=0;temp<50-remain;temp++)
 	{
-		cout<<temp;
+	//	cout<<temp;
 		if(empty_hour.at(temp)!=h&&empty.at(temp)==2)
 		{
 			remain++;
@@ -181,12 +181,12 @@ int seat:: check_empty(int h)
 			continue;
 		}
 	}
-	cout<<endl;
+//	cout<<endl;
 	return 0;
 }
 int seat:: empty_space(string name,string type,int h)
 {
-	cout<<"empty_space"<<endl;
+//	cout<<"empty_space"<<endl;
 	int temp=-1;
 	for(int i=0;i<50-remain;i++)
 	{

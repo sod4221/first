@@ -546,7 +546,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 		}
 		if(time>3)
 		{
-			cout<<"13 Exceed available time."<<endl;
+			cout<<"13	Exceed available time."<<endl;
 			return -1;
 		}
 		end_hour = hour+time;
@@ -555,7 +555,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 		check = studyroom.borrow_space(member_name,member_type,space_number,member_number,year,month,day,hour,end_hour);
 		if(check!=0)
 		{
-			cout<<"14 there is no remain space. This space is available after "<<check<<"."<<endl;
+			cout<<"14	there is no remain space. This space is available after "<<check<<"."<<endl;
 			return -1;
 		}
 		else
@@ -566,10 +566,15 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 	}
 	else if(space_type =="Seat")
 	{
+		int check2,check3;
+
+		check = first_seat.check_space(member_name,member_type);
+		check2 = second_seat.check_space(member_name,member_type);
+		
+		check3 = third_seat.check_space(member_name,member_type);
 		if(space_number==1)
 		{
-			check = first_seat.check_space(member_name,member_type);
-			if(check==11){
+			if(check==11 ||check2==11 || check3==11){
 				cout<<"11	You already borrowed this kind of space."<<endl;
 				return 0;
 			}
@@ -580,19 +585,19 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			}
 			if(member_type=="Undergraduate" && time > 3)
 			{
-				cout<<"13 Exceed available time."<<endl;
+				cout<<"13	 Exceed available time."<<endl;
 				return 0;
 			}
 			if(check<0)
 			{
-				cout<<"14 there is no remain space. This space is available after "<<-check<<"."<<endl;
+				cout<<"14	there is no remain space. This space is available after "<<-check<<"."<<endl;
 				return 0;
 			}
 			end_hour = hour+time;
 			if(end_hour>24)
 				end_hour=24;
 			check = first_seat.borrow_space(member_name,member_type,member_number,year,month,day,hour,hour+time);
-
+			cout<<"0	Success."<<endl;
 		}
 		else if(space_number==2)
 		{	
@@ -605,11 +610,12 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 				
 			else
 			{
-				check = second_seat.check_space(member_name,member_type);
 
-				if(check==11)
+				if(check==11 ||check2==11 || check3==11){
 					cout<<"11	You already borrowed this kind of space."<<endl;
-		
+					return -1;	
+				}
+
 				if(member_number>1)
 				{
 					cout<<"12	Exceed available number."<<endl;
@@ -617,12 +623,12 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 				}
 				if(member_type=="Undergraduate" && time > 3)
 				{
-					cout<<"13 Exceed available time."<<endl;
+					cout<<"13	Exceed available time."<<endl;
 					return 0;
 				}
-				if(check<0)
+				if(check2<0)
 				{
-					cout<<"14 there is no remain space. This space is available after "<<-check<<"."<<endl;
+					cout<<"14	there is no remain space. This space is available after "<<-check<<"."<<endl;
 					return 0;
 				}
 	
@@ -631,7 +637,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			if(end_hour>21)
 				end_hour=21;
 			check = second_seat.borrow_space(member_name,member_type,member_number,year,month,day,hour,hour+time);
-
+			cout<<"0	Success."<<endl;
 	
 		}
 		else if(space_number==3)
@@ -644,10 +650,12 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			}
 			else
 			{
-				check = third_seat.check_space(member_name,member_type);
 
-				if(check==11)
+				if(check==11 ||check2==11 || check3==11){
 					cout<<"11	You already borrowed this kind of space."<<endl;
+					return -1;
+				}
+					
 				if(member_number>1)
 				{
 					cout<<"12	Exceed available number."<<endl;
@@ -656,12 +664,12 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 	
 				if(member_type=="Undergraduate" && time > 3)
 				{
-					cout<<"13 Exceed available time."<<endl;
+					cout<<"13	Exceed available time."<<endl;
 					return 0;
 				}
-				if(check<0)
+				if(check3<0)
 				{
-					cout<<"14 there is no remain space. This space is available after "<<-check<<"."<<endl;
+					cout<<"14	there is no remain space. This space is available after "<<-check<<"."<<endl;
 					return 0;
 				}
 			}
@@ -670,6 +678,8 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			if(end_hour>18)
 				end_hour=18;
 			check = third_seat.borrow_space(member_name,member_type,member_number,year,month,day,hour,hour+time);
+			cout<<"0	Success."<<endl;
+
 		}
 		else
 		{
@@ -697,7 +707,7 @@ int library ::space_return(string space_type,int space_number,string member_type
 		}
 		check=studyroom.return_space(member_name,member_type,space_number);
 		if(check!=0){
-			cout<<"10	You did not borrow this place"<<endl;
+			cout<<"10	You did not borrow this space."<<endl;
 			return -1;
 		}
 		else
@@ -715,7 +725,7 @@ int library ::space_return(string space_type,int space_number,string member_type
 			if(check!=0)
 			{
 
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 
@@ -727,7 +737,7 @@ int library ::space_return(string space_type,int space_number,string member_type
 			if(check!=0)
 			{
 
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			return 0;
@@ -738,7 +748,7 @@ int library ::space_return(string space_type,int space_number,string member_type
 			if(check!=0)
 			{
 
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			return 0;
@@ -767,7 +777,7 @@ int library ::space_empty(string space_type,int space_number, string member_name
 			check = first_seat.empty_space(member_name,member_type,hour);
 				if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -782,7 +792,7 @@ int library ::space_empty(string space_type,int space_number, string member_name
 			check = first_seat.empty_space(member_name,member_type,hour);
 					if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -797,7 +807,7 @@ int library ::space_empty(string space_type,int space_number, string member_name
 			check = first_seat.empty_space(member_name,member_type,hour);
 			if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -824,7 +834,7 @@ int library ::space_empty(string space_type,int space_number, string member_name
 			check = studyroom.empty_space(member_name,member_type,hour);
 			if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -852,7 +862,7 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 			check = first_seat.comeback_space(member_name,member_type);	
 			if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -866,7 +876,7 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 			check = second_seat.comeback_space(member_name,member_type);	
 			if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -881,7 +891,7 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 			check = third_seat.comeback_space(member_name,member_type);	
 			if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -911,7 +921,7 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 
 			if(check==10)
 			{
-				cout<<"10	You did not borrow this place."<<endl;
+				cout<<"10	You did not borrow this space."<<endl;
 				return -1;
 			}
 			else
@@ -929,12 +939,12 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 }
 int library ::space_reset()
 {
-	cout<<"reset!"<<endl;
+//	cout<<"reset!"<<endl;
 	first_seat.reset_space();
 	second_seat.reset_space();
 	third_seat.reset_space();
 	studyroom.reset_space();
-
+	return 0;
 }
 int library :: input()
 {
@@ -992,7 +1002,7 @@ int library :: input()
 			resource_operation.push_back(op);
 		}
 	}while(r_type.size()!=0);
-	cout<<"read resource"<<endl;	
+//	cout<<"read resource"<<endl;	
 	
 	do
 	{
@@ -1033,11 +1043,11 @@ int library :: input()
 				smember_number.push_back(-1);
 				space_time.push_back(-1);
 			}
-		cout<<smember_number.back()<<space_time.back()<<endl;
+//		cout<<smember_number.back()<<space_time.back()<<endl;
 		}
 	}while(s_type.size()!=0);
 
-	cout<<"Read space"<<endl;
+//	cout<<"Read space"<<endl;
 	
 	do
 	{
@@ -1053,9 +1063,9 @@ int library :: input()
 		}
 
 
-	read_input.close();
-	read_space.close();
-	
+		read_input.close();
+		read_space.close();
+		
 
 			//space first start
 		if(resource_year.at(0)<=space_year.at(0))
@@ -1066,11 +1076,11 @@ int library :: input()
 			check = 1;
 		if(check == 1)	//resource start
 		{
-			cout<<"resource!!"<<endl;
+//			cout<<"resource!!"<<endl;
 			resource:
 			cout<<t<<"	";
 			t++;
-			cout<<member_name.at(0)<<member_type.at(0)<<resource_name.at(0)<<resource_type.at(0)<<resource_year.at(0)<<resource_month.at(0)<<resource_day.at(0);
+//			cout<<member_name.at(0)<<member_type.at(0)<<resource_name.at(0)<<resource_type.at(0)<<resource_year.at(0)<<resource_month.at(0)<<resource_day.at(0);
 
 			if(resource_operation.at(0)=='B')
 			{
@@ -1086,7 +1096,7 @@ int library :: input()
 				cout<<"ERROR"<<endl;
 			}
 			//pop
-			cout<<resource_year.at(0)<<resource_month.at(0)<<resource_day.at(0)<<endl;
+//			cout<<resource_year.at(0)<<resource_month.at(0)<<resource_day.at(0)<<endl;
 			member_name.erase(member_name.begin());
 			member_type.erase(member_type.begin());
 			resource_name.erase(resource_name.begin());
@@ -1099,49 +1109,51 @@ int library :: input()
 		//resource start
 		else
 		{
-			cout<<"space!!"<<endl;
+//			cout<<"space!!"<<endl;
 			space:
 			cout<<t<<"	";
 			t++;
 			if(space_year.at(0)!=b_year || space_month.at(0)!=b_month || space_day.at(0)!=b_day)
 			{	//초기화
-
-				cout<<"reset in library"<<endl;
+//				cout<<"reset in library"<<endl;
 				space_reset();
-				b_year = year;
-				b_month = month;
-				b_day = day;
+				b_year = space_year.at(0);
+				b_month = space_month.at(0);
+				b_day = space_day.at(0);
 			}
 			
-			if(b_hour != space_hour.at(0))
+			else if(b_hour != space_hour.at(0))
 			{
-				cout<<"empty reset!"<<endl;
+//				cout<<"empty reset!"<<endl;
 				first_seat.check_empty(hour);
 				second_seat.check_empty(hour);
 				third_seat.check_empty(hour);
 				b_hour = hour;
 			}
+			else
+			{
+			}
 	
 	
 			if(space_operation.at(0)=='B')
 			{
-				cout<<"borrow"<<endl;
-				space_borrow(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0),space_year.at(0),space_month.at(0),space_day.at(0),space_hour.at(0),space_time.at(0));
+//				cout<<"borrow"<<endl;
+				space_borrow(space_type.at(0),space_number.at(0)-1,smember_type.at(0),smember_name.at(0),smember_number.at(0),space_year.at(0),space_month.at(0),space_day.at(0),space_hour.at(0),space_time.at(0));
 			}
 			else if(space_operation.at(0)=='R')
 			{
-				cout<<"return"<<endl;
-				space_return(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0));
+///				cout<<"return"<<endl;
+				space_return(space_type.at(0),space_number.at(0)-1,smember_type.at(0),smember_name.at(0),smember_number.at(0));
 			}
 			else if(space_operation.at(0)=='E')
 			{	
-				cout<<"Empty!"<<endl;
-				space_empty(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0),space_hour.at(0));
+//				cout<<"Empty!"<<endl;
+				space_empty(space_type.at(0),space_number.at(0)-1,smember_name.at(0),smember_type.at(0),space_hour.at(0));
 			}
 			else if(space_operation.at(0)=='C')
 			{
-				cout<<"comeback"<<endl;
-				space_comeback(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0));
+//				cout<<"comeback"<<endl;
+				space_comeback(space_type.at(0),space_number.at(0)-1,smember_name.at(0),smember_type.at(0));
 			}
 			else
 			{
