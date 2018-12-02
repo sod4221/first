@@ -643,9 +643,9 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 		else if(space_number==3)
 		{
 
-			if(hour<9 || hour>=21)
+			if(hour<9 || hour>=18)
 			{
-				cout<<"9	This space is not available now. Available form 09 to 21"<<endl;
+				cout<<"9	This space is not available now. Available form 09 to 18"<<endl;
 				return 9;
 			}
 			else
