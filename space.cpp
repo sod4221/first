@@ -10,8 +10,8 @@ int study_room:: borrow_space(string name,string type,int room_number,int member
 	{
 		remain --;
 		room_borrow[room_number]=1;
-		room_borrow_name[room_number]=name;
-		room_borrow_type[room_number]=type;
+		room_member_name[room_number]=name;
+		room_member_type[room_number]=type;
 		year[room_number] = y;
 		month[room_number] = m;
 		day[room_number] = d;
@@ -20,9 +20,9 @@ int study_room:: borrow_space(string name,string type,int room_number,int member
 		return 0;
 	}
 }
-int study_room:: return_space(string name,string type, int roome_number)
+int study_room:: return_space(string name,string type, int room_number)
 {
-	if(room_borrow[room_number]==0 || room_borrow_name[room_number]!=name || room_borrow_type[room_number]!=type)
+	if(room_borrow[room_number]==0 || room_member_name[room_number]!=name || room_member_type[room_number]!=type)
 	{
 		return 10;
 	}
@@ -37,7 +37,7 @@ int study_room:: check_space(string name,string type)
 {
 	for(int i=0;i<10;i++)
 	{
-		if(room_borrow[i]==1 && room_borrow_name[i]==name && room_borrow_type[i]==type)
+		if(room_borrow[i]==1 && room_member_name[i]==name && room_member_type[i]==type)
 			return -end_hour[i];
 		else
 			continue;
@@ -53,9 +53,9 @@ int study_room:: reset_space()
 	}
 	remain = 10;
 }
-int study_room:: empty_space(string name,string type,int number,int hour)
+int study_room:: empty_space(string name,string type,int number)
 {
-	if(room_borrow[room_number]==0 || room_borrow_name[room_number]!=name || room_borrow_type[room_number]!=type)
+	if(room_borrow[number]==0 || room_member_name[number]!=name || room_member_type[number]!=type)
 	{
 		return 10;
 	}
@@ -66,7 +66,7 @@ int study_room:: empty_space(string name,string type,int number,int hour)
 }
 int study_room:: comeback_space(string name,string type,int number)
 {
-	if(room_borrow[room_number]==0 || room_borrow_name[room_number]!=name || room_borrow_type[room_number]!=type)
+	if(room_borrow[number]==0 || room_member_name[number]!=name || room_member_type[number]!=type)
 	{
 		return 10;
 	}
@@ -88,7 +88,7 @@ int seat:: check_space(string name,string type)
 	int size = borrow_name.size();
 	for(int i=0;i<size;i++)
 	{
-		if(borrow_name.at(i)==name&& borrow_type.at(i)==type)
+		if(borrow_name.at(i)==name && borrow_type.at(i)==type)
 			return 11;
 	}
 	if(remain==0)
@@ -97,7 +97,7 @@ int seat:: check_space(string name,string type)
 		for(int i=0;i<size;i++)
 		{
 			if(end_hour.at(i)>=0 && end_hour.at(i)<temp)
-				temp = end_hour;
+				temp = end_hour.at(i);
 		}
 		return -temp;
 	}
@@ -105,6 +105,7 @@ int seat:: check_space(string name,string type)
 }
 int seat:: borrow_space(string name, string type,int member_number,int y,int m,int d,int h,int end_h)	
 {
+	cout<<"seat borrow!!"<<endl;
 	remain--;
 	borrow_name.push_back(name);
 	borrow_type.push_back(type);
@@ -115,11 +116,12 @@ int seat:: borrow_space(string name, string type,int member_number,int y,int m,i
 	hour.push_back(h);
 	empty.push_back(1);
 	empty_hour.push_back(-1);
+	return 0;
 }
 int seat:: return_space(string name,string type)
 {
 	int temp=-1;
-	for(int i=0;i<hour.size();i++)
+	for(int i=0;i<50-remain;i++)
 	{
 		if(borrow_name.at(i)==name && borrow_type.at(i)==type)
 		{
@@ -132,54 +134,61 @@ int seat:: return_space(string name,string type)
 		return 10;
 	}
 	remain++;
-	borrow_name.erase(temp);
-	borrow_type.erase(temp);
-	borrow_number.erase(temp);
-	year.erase(temp);
-	month.erase(temp);
-	day.erase(temp);
-	hour.erase(temp);
-	empty.erase(temp);
-	empty_hour.erase(temp);
+	borrow_name.erase(borrow_name.begin()+temp);
+	borrow_type.erase(borrow_type.begin()+temp);
+	borrow_number.erase(borrow_number.begin()+temp);
+	year.erase(year.begin()+temp);
+	month.erase(month.begin()+temp);
+	day.erase(day.begin()+temp);
+	hour.erase(hour.begin()+temp);
+	empty.erase(empty.begin()+temp);
+	empty_hour.erase(empty_hour.begin()+temp);
 	return 0;
 }
 
 int seat:: reset_space()
 {
-	int size = borrow_size.size();
+	cout<<"reset!"<<endl;
 	borrow_type.erase(borrow_type.begin(),borrow_type.end());
 	borrow_name.erase(borrow_name.begin(),borrow_name.end());
 	empty.erase(empty.begin(),empty.end()); // 0 is 자리비움 1 is not 자리비움
 	empty_hour.erase(empty_hour.begin(),empty_hour.end());
 	remain=50;
+
+	return 0;
 }
-int seat:: check_empty(int hour)
+int seat:: check_empty(int h)
 {
-	for(int i=0;i<year.size();i++)
+	cout<<"check empty remain"<<remain<<endl;
+	for(int temp=0;temp<50-remain;temp++)
 	{
-		if(empty_hour.at(i)!=hour&&empty.at(i)==2)
+		cout<<temp;
+		if(empty_hour.at(temp)!=h&&empty.at(temp)==2)
 		{
 			remain++;
-			hour.erase(i);
-			month.erase(i);
-			year.erase(i);
-			day.erase(i);
-			empty.erase(i);
-			empty_hour.erase(i);
-			borrow_name.erase(i);
-			borrow_type.erase(i);
+			borrow_name.erase(borrow_name.begin()+temp);
+			borrow_type.erase(borrow_type.begin()+temp);
+			borrow_number.erase(borrow_number.begin()+temp);
+			year.erase(year.begin()+temp);
+			month.erase(month.begin()+temp);
+			day.erase(day.begin()+temp);
+			hour.erase(hour.begin()+temp);
+			empty.erase(empty.begin()+temp);
+			empty_hour.erase(empty_hour.begin()+temp);
 		}
 		else
 		{
 			continue;
 		}
 	}
+	cout<<endl;
 	return 0;
 }
-int seat:: empty_space(string name,string type,int hour)
+int seat:: empty_space(string name,string type,int h)
 {
+	cout<<"empty_space"<<endl;
 	int temp=-1;
-	for(int i=0;i<hour.size();i++)
+	for(int i=0;i<50-remain;i++)
 	{
 		if(borrow_name.at(i)==name && borrow_type.at(i)==type)
 		{
@@ -192,12 +201,12 @@ int seat:: empty_space(string name,string type,int hour)
 		return 10;
 	}
 	temp = 0;
-	for(;temp<borrow_time;temp++)
+	for(;temp<50-remain;temp++)
 	{
-		if(borrow_name.at(temp==name && borrow_type.at(temp)==type))
+		if(borrow_name.at(temp)==name && borrow_type.at(temp)==type)
 		{
 			empty.at(temp) = 2;
-			empty_hour.at(temp) = hour;
+			empty_hour.at(temp) = h;
 			return 0;
 		}
 	}
@@ -207,7 +216,7 @@ int seat:: comeback_space(string name,string type)
 {
 	int check=0;
 	int temp=0;
-	for(;temp<borrow_time;temp++)
+	for(;temp<50-remain;temp++)
 	{
 		if(borrow_name.at(temp)==name && borrow_type.at(temp)==type)
 		{

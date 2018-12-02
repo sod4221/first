@@ -12,12 +12,12 @@ using namespace std;
 class space
 {
 	public:
-		virtual int empty_space() = 0;
-		virtual int comeback_space() = 0;
-		virtual	int borrow_space() = 0;
-		virtual	int return_space() = 0;
-		virtual	int check_space() = 0;
-		virtual	int reset_space() = 0; // when 24:00 reset all space
+		int empty_space();
+		int comeback_space();
+		int borrow_space();
+		int return_space();
+		int check_space();
+		int reset_space(); // when 24:00 reset all space
 };
 /*space room policy
 1.time limit is 3 hours for all member
@@ -31,13 +31,9 @@ class study_room : public space
 	public:
 		int borrow_space(string name,string type,int room_number,int member_number,int y,int m,int d,int h,int end_h);
 		int return_space(string name,string type,int room_number);
-
 		int check_space(string name,string type);
-
 		int reset_space();
-
-		int empty_space(string name,string type,int number,int hour);
-
+		int empty_space(string name,string type,int number);
 		int comeback_space(string name,string type,int number);
 
 	private:
