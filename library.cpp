@@ -3,7 +3,7 @@
 
 void library :: init() //resource download
 {
-	freopen("output.dat","w",stdout);
+//	freoipen("output.dat","w",stdout);
 	cout.fill('0');
 	ifstream read_resource;
 	read_resource.open("resource.dat");
@@ -514,7 +514,7 @@ int library :: request_return(string member_name,string member_type,string resou
 	else
 	{
 //		cout<<"resource type error 1"<<resource_type<<endl;
-		return 0;
+		return -1;
 	}
 }
 
@@ -576,22 +576,22 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 		{
 			if(check==11 ||check2==11 || check3==11){
 				cout<<"11	You already borrowed this kind of space."<<endl;
-				return 0;
+				return -1;
 			}
 			if(member_number>1)
 			{
 				cout<<"12	Exceed available number."<<endl;
-				return 0;
+				return -1;
 			}
 			if(member_type=="Undergraduate" && time > 3)
 			{
 				cout<<"13	Exceed available time."<<endl;
-				return 0;
+				return -1;
 			}
 			if(check<0)
 			{
 				cout<<"14	There is no remain space. This space is available after "<<-check<<"."<<endl;
-				return 0;
+				return -1;
 			}
 			end_hour = hour+time;
 			if(end_hour>24)
@@ -605,7 +605,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			if(hour<9 || hour>=21)
 			{
 				cout<<"9	This space is not available now. Available form 09 to 21"<<endl;
-				return 9;
+				return -1;
 			}
 				
 			else
@@ -619,17 +619,17 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 				if(member_number>1)
 				{
 					cout<<"12	Exceed available number."<<endl;
-					return 0;
+					return -1;
 				}
 				if(member_type=="Undergraduate" && time > 3)
 				{
 					cout<<"13	Exceed available time."<<endl;
-					return 0;
+					return -1;
 				}
 				if(check2<0)
 				{
 					cout<<"14	There is no remain space. This space is available after "<<-check<<"."<<endl;
-					return 0;
+					return -1;
 				}
 	
 			}
@@ -646,7 +646,7 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 			if(hour<9 || hour>=18)
 			{
 				cout<<"9	This space is not available now. Available form 09 to 18"<<endl;
-				return 9;
+				return -1;
 			}
 			else
 			{
@@ -659,18 +659,18 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 				if(member_number>1)
 				{
 					cout<<"12	Exceed available number."<<endl;
-					return 0;
+					return -1;
 				}
 	
 				if(member_type=="Undergraduate" && time > 3)
 				{
 					cout<<"13	Exceed available time."<<endl;
-					return 0;
+					return -1;
 				}
 				if(check3<0)
 				{
 					cout<<"14	There is no remain space. This space is available after "<<-check<<"."<<endl;
-					return 0;
+					return -1;
 				}
 			}
 	
@@ -684,13 +684,13 @@ int library ::space_borrow(string space_type,int space_number,string member_type
 		else
 		{
 			cout<<"8	Invalid space Id."<<endl;
-				return 0;
+				return -1;
 		}
 
 	}
 	else
 	{
-		cout<<"ERROR"<<endl;
+	 throw -2;
 	}
 
 }
@@ -762,8 +762,7 @@ int library ::space_return(string space_type,int space_number,string member_type
 	}
 	else
 	{
-		cout<<"ERROR"<<endl;
-		return -1;
+		throw -2;
 	}
 
 }
@@ -846,8 +845,8 @@ int library ::space_empty(string space_type,int space_number, string member_name
 	}
 	else
 	{
-		cout<<"ERROR"<<endl;
-		return -1;
+//		cout<<"ERROR"<<endl;
+		throw -2;
 	}
 	return 0;
 
@@ -904,7 +903,7 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 		else
 		{
 			cout<<"8	Invalid space Id."<<endl;
-			return 0;
+			return -1;
 		}
 	
 	}
@@ -913,7 +912,7 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 		if(space_number<0 || space_number >10)
 		{
 			cout<<"8	Invalid space Id."<<endl;
-			return 0;
+			return -1;
 		}
 		else
 		{
@@ -927,13 +926,14 @@ int library ::space_comeback(string space_type,int space_number, string member_n
 			else
 			{
 				cout<<"0	Success."<<endl;
+				return 0;
 			}
 		}
 	
 	}
 	else
 	{
-		cout<<"ERROR"<<endl;
+		throw -2;
 	}
 
 }
@@ -1043,8 +1043,8 @@ int library :: input()
 			}
 			else
 			{
-				smember_number.push_back(-1);
-				space_time.push_back(-1);
+				smember_number.push_back(0);
+				space_time.push_back(0);
 			}
 //		cout<<smember_number.back()<<space_time.back()<<endl;
 		}
@@ -1112,56 +1112,93 @@ int library :: input()
 		//resource start
 		else
 		{
-//			cout<<"space!!"<<endl;
-			space:
-			cout<<t<<"	";
-			t++;
-			if(space_year.at(0)!=b_year || space_month.at(0)!=b_month || space_day.at(0)!=b_day)
-			{	//초기화
-//				cout<<"reset in library"<<endl;
-				space_reset();
-				b_year = space_year.at(0);
-				b_month = space_month.at(0);
-				b_day = space_day.at(0);
-			}
+space:
+			try{
+	
+	//			cout<<"space!!"<<endl;
+				cout<<t<<"	";
+				t++;
 			
-			else if(b_hour != space_hour.at(0))
-			{
-//				cout<<"empty reset!"<<endl;
-				first_seat.check_empty(hour);
-				second_seat.check_empty(hour);
-				third_seat.check_empty(hour);
-				b_hour = hour;
+				if(space_year.at(0)>2019)
+					throw -1; //Date out of range
+				if(smember_type.at(0) !="Undergraduate" && smember_type.at(0) != "Graduate" && smember_type.at(0)!="Faculty")
+					throw -4;
+
+
+				int temp_s = (smember_name.at(0)).size();;
+				for(int i=0;i<temp_s;i++)
+				{
+					if((smember_name.at(0)).at(i)>=48&&(smember_name.at(0)).at(i)<=57)
+						throw -5;
+				}
+				if(space_time.at(0)<0)
+					throw -6;
+				
+				if(space_year.at(0)!=b_year || space_month.at(0)!=b_month || space_day.at(0)!=b_day)
+				{	//초기화
+	//				cout<<"reset in library"<<endl;
+					space_reset();
+					b_year = space_year.at(0);
+					b_month = space_month.at(0);
+					b_day = space_day.at(0);
+				}
+				
+				else if(b_hour != space_hour.at(0))
+				{
+	//				cout<<"empty reset!"<<endl;
+					first_seat.check_empty(hour);
+					second_seat.check_empty(hour);
+					third_seat.check_empty(hour);
+					b_hour = hour;
+				}
+				else
+				{
+				}
+				
+				
+				if(space_operation.at(0)=='B')
+				{
+	//				cout<<"borrow"<<endl;
+					space_borrow(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0),space_year.at(0),space_month.at(0),space_day.at(0),space_hour.at(0),space_time.at(0));
+				}
+				else if(space_operation.at(0)=='R')
+				{
+	///				cout<<"return"<<endl;
+					space_return(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0));
+				}
+				else if(space_operation.at(0)=='E')
+				{	
+	//				cout<<"Empty!"<<endl;
+					space_empty(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0),space_hour.at(0));
+				}
+				else if(space_operation.at(0)=='C')
+				{
+	//				cout<<"comeback"<<endl;
+					space_comeback(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0));
+				}
+				else
+				{
+					throw -3;	//Non-exist operation
+				}			
 			}
-			else
+			catch(int error)
 			{
+				cout<<"-1	";
+				if(error==-1)
+					cout<<"Date out of range."<<endl;
+				else if(error==-2)
+					cout<<"Non-exist space type."<<endl;
+				else if(error==-3)
+					cout<<"Non-exist operation."<<endl;
+				else if(error==-4)
+					cout<<"Nom-exist member type"<<endl;
+				else if(error==-5)
+					cout<<"Member name with numbers"<<endl;
+				else
+					cout<<"Negative time."<<endl;
+
 			}
-	
-	
-			if(space_operation.at(0)=='B')
-			{
-//				cout<<"borrow"<<endl;
-				space_borrow(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0),space_year.at(0),space_month.at(0),space_day.at(0),space_hour.at(0),space_time.at(0));
-			}
-			else if(space_operation.at(0)=='R')
-			{
-///				cout<<"return"<<endl;
-				space_return(space_type.at(0),space_number.at(0),smember_type.at(0),smember_name.at(0),smember_number.at(0));
-			}
-			else if(space_operation.at(0)=='E')
-			{	
-//				cout<<"Empty!"<<endl;
-				space_empty(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0),space_hour.at(0));
-			}
-			else if(space_operation.at(0)=='C')
-			{
-//				cout<<"comeback"<<endl;
-				space_comeback(space_type.at(0),space_number.at(0),smember_name.at(0),smember_type.at(0));
-			}
-			else
-			{
-				cout<<"ERROR"<<endl;
-			}			
+
 			space_year.erase(space_year.begin());
 			space_month.erase(space_month.begin());
 			space_day.erase(space_day.begin());
