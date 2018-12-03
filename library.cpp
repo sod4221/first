@@ -985,6 +985,7 @@ int library :: input()
 			int temp;
 //			cout<<date<<endl;
 			ss>>year;
+			if(year<100)
 			year += 2000;
 			date.erase(0,3);
 			ss.str(date);
